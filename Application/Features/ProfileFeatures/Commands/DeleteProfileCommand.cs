@@ -3,6 +3,8 @@ using Application.Features.ProfileFeatures.Responses;
 using Application.Interfaces;
 using Domain.Entities;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -22,7 +24,7 @@ namespace Application.Features.ProfileFeatures.Commands
 
             public async Task<DeleteCommandResponse> Handle(DeleteProfileCommand request, CancellationToken cancellationToken)
             {
-                Profile profile = new Profile { IdentityUserId = request.IdentityUserId };
+                Profile profile = await _context.Profiles.Where(p => p.IdentityUserId == request.IdentityUserId).SingleOrDefaultAsync();
                 _context.Profiles.Remove(profile);
                 await _context.SaveChangesAsync();
 

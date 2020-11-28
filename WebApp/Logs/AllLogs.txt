@@ -35364,3 +35364,256 @@ WHERE [a].[RoleId] = @__role_Id_0
 2020-11-28 11:28:20.381 +03:00 [INF] Executed endpoint 'WebApp.Controllers.HomeController.Error (WebApp)'
 2020-11-28 11:28:20.381 +03:00 [INF] Request finished in 42.3487ms 404 text/html; charset=utf-8
 2020-11-28 11:28:20.381 +03:00 [INF] Request finished in 42.963ms 404 text/html; charset=utf-8
+2020-11-28 18:05:58.050 +03:00 [INF] Starting up
+2020-11-28 18:05:58.335 +03:00 [INF] User profile is available. Using 'C:\Users\sovsp\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2020-11-28 18:05:59.875 +03:00 [INF] Request starting HTTP/2.0 GET https://localhost:44326/  
+2020-11-28 18:06:00.375 +03:00 [INF] Identity.Application was not authenticated. Failure message: Unprotect ticket failed
+2020-11-28 18:06:00.385 +03:00 [INF] Executing endpoint 'WebApp.Controllers.HomeController.Index (WebApp)'
+2020-11-28 18:06:00.485 +03:00 [INF] Route matched with {action = "Index", controller = "Home"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Index() on controller WebApp.Controllers.HomeController (WebApp).
+2020-11-28 18:06:00.532 +03:00 [INF] Executing ViewResult, running view Index.
+2020-11-28 18:06:01.037 +03:00 [INF] Executed ViewResult - view Index executed in 497.6037ms.
+2020-11-28 18:06:01.046 +03:00 [INF] Executed action WebApp.Controllers.HomeController.Index (WebApp) in 559.3743ms
+2020-11-28 18:06:01.049 +03:00 [INF] Executed endpoint 'WebApp.Controllers.HomeController.Index (WebApp)'
+2020-11-28 18:06:01.064 +03:00 [INF] Request finished in 1212.1152ms 200 text/html; charset=utf-8
+2020-11-28 18:06:01.255 +03:00 [INF] Request starting HTTP/2.0 GET https://localhost:44326/js/notification.js  
+2020-11-28 18:06:01.270 +03:00 [INF] The file /js/notification.js was not modified
+2020-11-28 18:06:01.274 +03:00 [INF] Request finished in 20.2334ms 304 application/javascript
+2020-11-28 18:06:01.515 +03:00 [INF] Request starting HTTP/2.0 POST https://localhost:44326/notification/negotiate?negotiateVersion=1 text/plain;charset=UTF-8 0
+2020-11-28 18:06:01.539 +03:00 [INF] Identity.Application was not authenticated. Failure message: Unprotect ticket failed
+2020-11-28 18:06:01.539 +03:00 [INF] Executing endpoint '/notification/negotiate'
+2020-11-28 18:06:01.570 +03:00 [INF] Executed endpoint '/notification/negotiate'
+2020-11-28 18:06:01.571 +03:00 [INF] Request finished in 61.3973ms 200 application/json
+2020-11-28 18:06:01.792 +03:00 [INF] Request starting HTTP/1.1 GET https://localhost:44326/notification?id=ake8XkQVotsBdoRYMkBxfw  
+2020-11-28 18:06:01.807 +03:00 [INF] Identity.Application was not authenticated. Failure message: Unprotect ticket failed
+2020-11-28 18:06:01.807 +03:00 [INF] Executing endpoint '/notification'
+2020-11-28 18:06:02.479 +03:00 [INF] Executed endpoint '/notification'
+2020-11-28 18:06:02.502 +03:00 [INF] Request finished in 709.644ms 101 
+2020-11-28 18:29:04.193 +03:00 [INF] Starting up
+2020-11-28 18:29:04.357 +03:00 [INF] User profile is available. Using 'C:\Users\sovsp\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2020-11-28 18:29:05.593 +03:00 [INF] Request starting HTTP/2.0 GET https://localhost:44326/  
+2020-11-28 18:29:05.729 +03:00 [INF] Identity.Application was not authenticated. Failure message: Unprotect ticket failed
+2020-11-28 18:29:05.732 +03:00 [INF] Executing endpoint 'WebApp.Controllers.HomeController.Index (WebApp)'
+2020-11-28 18:29:05.789 +03:00 [INF] Route matched with {action = "Index", controller = "Home"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Index() on controller WebApp.Controllers.HomeController (WebApp).
+2020-11-28 18:29:05.868 +03:00 [INF] Executing ViewResult, running view Index.
+2020-11-28 18:29:06.384 +03:00 [INF] Executed ViewResult - view Index executed in 544.2483ms.
+2020-11-28 18:29:06.390 +03:00 [INF] Executed action WebApp.Controllers.HomeController.Index (WebApp) in 599.9298ms
+2020-11-28 18:29:06.392 +03:00 [INF] Executed endpoint 'WebApp.Controllers.HomeController.Index (WebApp)'
+2020-11-28 18:29:06.401 +03:00 [INF] Request finished in 814.9209ms 200 text/html; charset=utf-8
+2020-11-28 18:29:06.773 +03:00 [INF] Request starting HTTP/2.0 POST https://localhost:44326/notification/negotiate?negotiateVersion=1 text/plain;charset=UTF-8 0
+2020-11-28 18:29:06.781 +03:00 [INF] Identity.Application was not authenticated. Failure message: Unprotect ticket failed
+2020-11-28 18:29:06.782 +03:00 [INF] Executing endpoint '/notification/negotiate'
+2020-11-28 18:29:06.804 +03:00 [INF] Executed endpoint '/notification/negotiate'
+2020-11-28 18:29:06.804 +03:00 [INF] Request finished in 35.6107ms 200 application/json
+2020-11-28 18:29:06.972 +03:00 [INF] Request starting HTTP/1.1 GET https://localhost:44326/notification?id=zIh65Ut60KjR2Gdx9bUcAQ  
+2020-11-28 18:29:06.984 +03:00 [INF] Identity.Application was not authenticated. Failure message: Unprotect ticket failed
+2020-11-28 18:29:06.984 +03:00 [INF] Executing endpoint '/notification'
+2020-11-28 19:00:54.095 +03:00 [INF] Starting up
+2020-11-28 19:00:54.201 +03:00 [INF] User profile is available. Using 'C:\Users\sovsp\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2020-11-28 19:39:12.228 +03:00 [INF] Starting up
+2020-11-28 19:39:12.316 +03:00 [INF] User profile is available. Using 'C:\Users\sovsp\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2020-11-28 19:39:12.771 +03:00 [INF] Request starting HTTP/2.0 GET https://localhost:44326/  
+2020-11-28 19:39:12.869 +03:00 [INF] Identity.Application was not authenticated. Failure message: Unprotect ticket failed
+2020-11-28 19:39:12.871 +03:00 [INF] Executing endpoint 'WebApp.Controllers.HomeController.Index (WebApp)'
+2020-11-28 19:39:12.896 +03:00 [INF] Route matched with {action = "Index", controller = "Home"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Index() on controller WebApp.Controllers.HomeController (WebApp).
+2020-11-28 19:39:12.919 +03:00 [INF] Executing ViewResult, running view Index.
+2020-11-28 19:39:13.065 +03:00 [INF] Executed ViewResult - view Index executed in 150.1612ms.
+2020-11-28 19:39:13.068 +03:00 [INF] Executed action WebApp.Controllers.HomeController.Index (WebApp) in 171.6377ms
+2020-11-28 19:39:13.069 +03:00 [INF] Executed endpoint 'WebApp.Controllers.HomeController.Index (WebApp)'
+2020-11-28 19:39:13.072 +03:00 [INF] Request finished in 304.1631ms 200 text/html; charset=utf-8
+2020-11-28 19:39:13.128 +03:00 [INF] Request starting HTTP/2.0 GET https://localhost:44326/js/notification.js  
+2020-11-28 19:39:13.139 +03:00 [INF] The file /js/notification.js was not modified
+2020-11-28 19:39:13.141 +03:00 [INF] Request finished in 13.7689ms 304 application/javascript
+2020-11-28 19:39:13.239 +03:00 [INF] Request starting HTTP/2.0 POST https://localhost:44326/notification/negotiate?negotiateVersion=1 text/plain;charset=UTF-8 0
+2020-11-28 19:39:13.242 +03:00 [INF] Identity.Application was not authenticated. Failure message: Unprotect ticket failed
+2020-11-28 19:39:13.242 +03:00 [INF] Executing endpoint '/notification/negotiate'
+2020-11-28 19:39:13.251 +03:00 [INF] Executed endpoint '/notification/negotiate'
+2020-11-28 19:39:13.251 +03:00 [INF] Request finished in 13.3578ms 200 application/json
+2020-11-28 19:39:13.318 +03:00 [INF] Request starting HTTP/1.1 GET https://localhost:44326/notification?id=wc27YPAD2dszkFUa8cKRDw  
+2020-11-28 19:39:13.323 +03:00 [INF] Identity.Application was not authenticated. Failure message: Unprotect ticket failed
+2020-11-28 19:39:13.323 +03:00 [INF] Executing endpoint '/notification'
+2020-11-28 19:39:14.902 +03:00 [INF] Request starting HTTP/2.0 GET https://localhost:44326/Account/Register  
+2020-11-28 19:39:14.906 +03:00 [INF] Identity.Application was not authenticated. Failure message: Unprotect ticket failed
+2020-11-28 19:39:14.907 +03:00 [INF] Executing endpoint 'WebApp.Controllers.AccountController.Register (WebApp)'
+2020-11-28 19:39:14.912 +03:00 [INF] Route matched with {action = "Register", controller = "Account"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Register() on controller WebApp.Controllers.AccountController (WebApp).
+2020-11-28 19:39:15.090 +03:00 [INF] Executing ViewResult, running view Register.
+2020-11-28 19:39:15.136 +03:00 [INF] Executed ViewResult - view Register executed in 46.6293ms.
+2020-11-28 19:39:15.136 +03:00 [INF] Executed action WebApp.Controllers.AccountController.Register (WebApp) in 224.0839ms
+2020-11-28 19:39:15.136 +03:00 [INF] Executed endpoint 'WebApp.Controllers.AccountController.Register (WebApp)'
+2020-11-28 19:39:15.137 +03:00 [INF] Request finished in 235.4173ms 200 text/html; charset=utf-8
+2020-11-28 19:39:15.175 +03:00 [INF] Executed endpoint '/notification'
+2020-11-28 19:39:15.178 +03:00 [INF] Request finished in 1859.2338ms 101 
+2020-11-28 19:39:15.220 +03:00 [INF] Request starting HTTP/2.0 POST https://localhost:44326/notification/negotiate?negotiateVersion=1 text/plain;charset=UTF-8 0
+2020-11-28 19:39:15.221 +03:00 [INF] Identity.Application was not authenticated. Failure message: Unprotect ticket failed
+2020-11-28 19:39:15.221 +03:00 [INF] Executing endpoint '/notification/negotiate'
+2020-11-28 19:39:15.221 +03:00 [INF] Executed endpoint '/notification/negotiate'
+2020-11-28 19:39:15.221 +03:00 [INF] Request finished in 1.3854ms 200 application/json
+2020-11-28 19:39:15.248 +03:00 [INF] Request starting HTTP/1.1 GET https://localhost:44326/notification?id=E7qjTqDUbtnbz8swp3GSgA  
+2020-11-28 19:39:15.249 +03:00 [INF] Identity.Application was not authenticated. Failure message: Unprotect ticket failed
+2020-11-28 19:39:15.249 +03:00 [INF] Executing endpoint '/notification'
+2020-11-28 19:39:22.126 +03:00 [INF] Request starting HTTP/2.0 POST https://localhost:44326/Account/Register application/x-www-form-urlencoded 280
+2020-11-28 19:39:22.128 +03:00 [INF] Identity.Application was not authenticated. Failure message: Unprotect ticket failed
+2020-11-28 19:39:22.128 +03:00 [INF] Executing endpoint 'WebApp.Controllers.AccountController.Register (WebApp)'
+2020-11-28 19:39:22.141 +03:00 [INF] Route matched with {action = "Register", controller = "Account"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Register(WebApp.ViewModels.UserViewModels.RegisterUserViewModel) on controller WebApp.Controllers.AccountController (WebApp).
+2020-11-28 19:39:22.183 +03:00 [WRN] User ddf56c24-6645-4c11-930d-255489d13fa9 password validation failed: PasswordRequiresNonAlphanumeric.
+2020-11-28 19:39:22.184 +03:00 [INF] Executing ViewResult, running view Register.
+2020-11-28 19:39:22.193 +03:00 [INF] Executed ViewResult - view Register executed in 8.9331ms.
+2020-11-28 19:39:22.193 +03:00 [INF] Executed action WebApp.Controllers.AccountController.Register (WebApp) in 51.437ms
+2020-11-28 19:39:22.193 +03:00 [INF] Executed endpoint 'WebApp.Controllers.AccountController.Register (WebApp)'
+2020-11-28 19:39:22.193 +03:00 [INF] Request finished in 67.5819ms 200 text/html; charset=utf-8
+2020-11-28 19:39:22.217 +03:00 [INF] Executed endpoint '/notification'
+2020-11-28 19:39:22.218 +03:00 [INF] Request finished in 6969.6352ms 101 
+2020-11-28 19:39:22.274 +03:00 [INF] Request starting HTTP/2.0 POST https://localhost:44326/notification/negotiate?negotiateVersion=1 text/plain;charset=UTF-8 0
+2020-11-28 19:39:22.274 +03:00 [INF] Identity.Application was not authenticated. Failure message: Unprotect ticket failed
+2020-11-28 19:39:22.274 +03:00 [INF] Executing endpoint '/notification/negotiate'
+2020-11-28 19:39:22.275 +03:00 [INF] Executed endpoint '/notification/negotiate'
+2020-11-28 19:39:22.275 +03:00 [INF] Request finished in 1.7216ms 200 application/json
+2020-11-28 19:39:22.307 +03:00 [INF] Request starting HTTP/1.1 GET https://localhost:44326/notification?id=UkGhn91z4422ZP73PGq13g  
+2020-11-28 19:39:22.308 +03:00 [INF] Identity.Application was not authenticated. Failure message: Unprotect ticket failed
+2020-11-28 19:39:22.308 +03:00 [INF] Executing endpoint '/notification'
+2020-11-28 19:39:35.281 +03:00 [INF] Request starting HTTP/2.0 POST https://localhost:44326/Account/Register application/x-www-form-urlencoded 282
+2020-11-28 19:39:35.283 +03:00 [INF] Identity.Application was not authenticated. Failure message: Unprotect ticket failed
+2020-11-28 19:39:35.284 +03:00 [INF] Executing endpoint 'WebApp.Controllers.AccountController.Register (WebApp)'
+2020-11-28 19:39:35.284 +03:00 [INF] Route matched with {action = "Register", controller = "Account"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Register(WebApp.ViewModels.UserViewModels.RegisterUserViewModel) on controller WebApp.Controllers.AccountController (WebApp).
+2020-11-28 19:39:35.922 +03:00 [INF] Entity Framework Core 3.1.9 initialized 'ApplicationDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: MigrationsAssembly=Persistence, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null 
+2020-11-28 19:39:37.525 +03:00 [INF] Executed DbCommand (98ms) [Parameters=[@__normalizedUserName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[NormalizedUserName] = @__normalizedUserName_0
+2020-11-28 19:39:37.735 +03:00 [INF] Executed DbCommand (23ms) [Parameters=[@p0='?' (Size = 450), @p1='?' (DbType = Int32), @p2='?' (Size = 4000), @p3='?' (Size = 256), @p4='?' (DbType = Boolean), @p5='?' (DbType = Boolean), @p6='?' (DbType = DateTimeOffset), @p7='?' (Size = 256), @p8='?' (Size = 256), @p9='?' (Size = 4000), @p10='?' (Size = 4000), @p11='?' (DbType = Boolean), @p12='?' (Size = 4000), @p13='?' (DbType = Boolean), @p14='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SET NOCOUNT ON;
+INSERT INTO [AspNetUsers] ([Id], [AccessFailedCount], [ConcurrencyStamp], [Email], [EmailConfirmed], [LockoutEnabled], [LockoutEnd], [NormalizedEmail], [NormalizedUserName], [PasswordHash], [PhoneNumber], [PhoneNumberConfirmed], [SecurityStamp], [TwoFactorEnabled], [UserName])
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10, @p11, @p12, @p13, @p14);
+2020-11-28 19:39:37.832 +03:00 [INF] Executed DbCommand (22ms) [Parameters=[@p0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET NOCOUNT ON;
+INSERT INTO [Profiles] ([IdentityUserId])
+VALUES (@p0);
+SELECT [Id]
+FROM [Profiles]
+WHERE @@ROWCOUNT = 1 AND [Id] = scope_identity();
+2020-11-28 19:39:43.018 +03:00 [INF] Executing RedirectResult, redirecting to /.
+2020-11-28 19:39:43.020 +03:00 [INF] Executed action WebApp.Controllers.AccountController.Register (WebApp) in 7735.5439ms
+2020-11-28 19:39:43.020 +03:00 [INF] Executed endpoint 'WebApp.Controllers.AccountController.Register (WebApp)'
+2020-11-28 19:39:43.023 +03:00 [INF] Request finished in 7742.0669ms 302 
+2020-11-28 19:39:43.027 +03:00 [INF] Request starting HTTP/2.0 GET https://localhost:44326/  
+2020-11-28 19:39:43.028 +03:00 [INF] Identity.Application was not authenticated. Failure message: Unprotect ticket failed
+2020-11-28 19:39:43.028 +03:00 [INF] Executing endpoint 'WebApp.Controllers.HomeController.Index (WebApp)'
+2020-11-28 19:39:43.028 +03:00 [INF] Route matched with {action = "Index", controller = "Home"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Index() on controller WebApp.Controllers.HomeController (WebApp).
+2020-11-28 19:39:43.029 +03:00 [INF] Executing ViewResult, running view Index.
+2020-11-28 19:39:43.030 +03:00 [INF] Executed ViewResult - view Index executed in 1.8665ms.
+2020-11-28 19:39:43.031 +03:00 [INF] Executed action WebApp.Controllers.HomeController.Index (WebApp) in 2.2424ms
+2020-11-28 19:39:43.031 +03:00 [INF] Executed endpoint 'WebApp.Controllers.HomeController.Index (WebApp)'
+2020-11-28 19:39:43.031 +03:00 [INF] Request finished in 3.6808ms 200 text/html; charset=utf-8
+2020-11-28 19:39:43.127 +03:00 [INF] Executed endpoint '/notification'
+2020-11-28 19:39:43.127 +03:00 [INF] Request finished in 20819.2748ms 101 
+2020-11-28 19:39:43.192 +03:00 [INF] Request starting HTTP/2.0 POST https://localhost:44326/notification/negotiate?negotiateVersion=1 text/plain;charset=UTF-8 0
+2020-11-28 19:39:43.193 +03:00 [INF] Identity.Application was not authenticated. Failure message: Unprotect ticket failed
+2020-11-28 19:39:43.193 +03:00 [INF] Executing endpoint '/notification/negotiate'
+2020-11-28 19:39:43.193 +03:00 [INF] Executed endpoint '/notification/negotiate'
+2020-11-28 19:39:43.193 +03:00 [INF] Request finished in 1.1872ms 200 application/json
+2020-11-28 19:39:43.222 +03:00 [INF] Request starting HTTP/1.1 GET https://localhost:44326/notification?id=xbu5uIGmM2OxJIr7NMTIiA  
+2020-11-28 19:39:43.222 +03:00 [INF] Identity.Application was not authenticated. Failure message: Unprotect ticket failed
+2020-11-28 19:39:43.222 +03:00 [INF] Executing endpoint '/notification'
+2020-11-28 19:55:02.914 +03:00 [INF] Starting up
+2020-11-28 19:55:02.982 +03:00 [INF] User profile is available. Using 'C:\Users\sovsp\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2020-11-28 19:55:03.321 +03:00 [INF] Request starting HTTP/2.0 GET https://localhost:44326/  
+2020-11-28 19:55:03.394 +03:00 [INF] Identity.Application was not authenticated. Failure message: Unprotect ticket failed
+2020-11-28 19:55:03.395 +03:00 [INF] Executing endpoint 'WebApp.Controllers.HomeController.Index (WebApp)'
+2020-11-28 19:55:03.416 +03:00 [INF] Route matched with {action = "Index", controller = "Home"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Index() on controller WebApp.Controllers.HomeController (WebApp).
+2020-11-28 19:55:03.433 +03:00 [INF] Executing ViewResult, running view Index.
+2020-11-28 19:55:03.546 +03:00 [INF] Executed ViewResult - view Index executed in 114.8519ms.
+2020-11-28 19:55:03.548 +03:00 [INF] Executed action WebApp.Controllers.HomeController.Index (WebApp) in 130.865ms
+2020-11-28 19:55:03.548 +03:00 [INF] Executed endpoint 'WebApp.Controllers.HomeController.Index (WebApp)'
+2020-11-28 19:55:03.551 +03:00 [INF] Request finished in 234.469ms 200 text/html; charset=utf-8
+2020-11-28 19:55:03.716 +03:00 [INF] Request starting HTTP/2.0 POST https://localhost:44326/notification/negotiate?negotiateVersion=1 text/plain;charset=UTF-8 0
+2020-11-28 19:55:03.723 +03:00 [INF] Identity.Application was not authenticated. Failure message: Unprotect ticket failed
+2020-11-28 19:55:03.724 +03:00 [INF] Executing endpoint '/notification/negotiate'
+2020-11-28 19:55:03.734 +03:00 [INF] Executed endpoint '/notification/negotiate'
+2020-11-28 19:55:03.734 +03:00 [INF] Request finished in 20.0734ms 200 application/json
+2020-11-28 19:55:03.806 +03:00 [INF] Request starting HTTP/1.1 GET https://localhost:44326/notification?id=bil0YXAzWgRE2-2lY3SkUw  
+2020-11-28 19:55:03.813 +03:00 [INF] Identity.Application was not authenticated. Failure message: Unprotect ticket failed
+2020-11-28 19:55:03.813 +03:00 [INF] Executing endpoint '/notification'
+2020-11-28 19:55:06.549 +03:00 [INF] Executed endpoint '/notification'
+2020-11-28 19:55:06.551 +03:00 [INF] Request finished in 2744.2094ms 101 
+2020-11-28 19:56:13.078 +03:00 [INF] Starting up
+2020-11-28 19:56:13.138 +03:00 [INF] User profile is available. Using 'C:\Users\sovsp\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2020-11-28 19:56:13.457 +03:00 [INF] Request starting HTTP/2.0 GET https://localhost:44326/  
+2020-11-28 19:56:13.529 +03:00 [INF] Identity.Application was not authenticated. Failure message: Unprotect ticket failed
+2020-11-28 19:56:13.531 +03:00 [INF] Executing endpoint 'WebApp.Controllers.HomeController.Index (WebApp)'
+2020-11-28 19:56:13.551 +03:00 [INF] Route matched with {action = "Index", controller = "Home"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Index() on controller WebApp.Controllers.HomeController (WebApp).
+2020-11-28 19:56:13.566 +03:00 [INF] Executing ViewResult, running view Index.
+2020-11-28 19:56:13.685 +03:00 [INF] Executed ViewResult - view Index executed in 122.2557ms.
+2020-11-28 19:56:13.687 +03:00 [INF] Executed action WebApp.Controllers.HomeController.Index (WebApp) in 136.1517ms
+2020-11-28 19:56:13.688 +03:00 [INF] Executed endpoint 'WebApp.Controllers.HomeController.Index (WebApp)'
+2020-11-28 19:56:13.690 +03:00 [INF] Request finished in 236.5873ms 200 text/html; charset=utf-8
+2020-11-28 19:56:13.914 +03:00 [INF] Request starting HTTP/2.0 POST https://localhost:44326/notification/negotiate?negotiateVersion=1 text/plain;charset=UTF-8 0
+2020-11-28 19:56:13.921 +03:00 [INF] Identity.Application was not authenticated. Failure message: Unprotect ticket failed
+2020-11-28 19:56:13.922 +03:00 [INF] Executing endpoint '/notification/negotiate'
+2020-11-28 19:56:13.929 +03:00 [INF] Executed endpoint '/notification/negotiate'
+2020-11-28 19:56:13.930 +03:00 [INF] Request finished in 17.1772ms 200 application/json
+2020-11-28 19:56:14.008 +03:00 [INF] Request starting HTTP/1.1 GET https://localhost:44326/notification?id=w7HrQgnSBRwFGoUiAD80dw  
+2020-11-28 19:56:14.013 +03:00 [INF] Identity.Application was not authenticated. Failure message: Unprotect ticket failed
+2020-11-28 19:56:14.013 +03:00 [INF] Executing endpoint '/notification'
+2020-11-28 19:56:54.313 +03:00 [INF] Starting up
+2020-11-28 19:56:54.373 +03:00 [INF] User profile is available. Using 'C:\Users\sovsp\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2020-11-28 19:56:54.727 +03:00 [INF] Request starting HTTP/2.0 GET https://localhost:44326/  
+2020-11-28 19:56:54.804 +03:00 [INF] Identity.Application was not authenticated. Failure message: Unprotect ticket failed
+2020-11-28 19:56:54.805 +03:00 [INF] Executing endpoint 'WebApp.Controllers.HomeController.Index (WebApp)'
+2020-11-28 19:56:54.827 +03:00 [INF] Route matched with {action = "Index", controller = "Home"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Index() on controller WebApp.Controllers.HomeController (WebApp).
+2020-11-28 19:56:54.843 +03:00 [INF] Executing ViewResult, running view Index.
+2020-11-28 19:56:54.951 +03:00 [INF] Executed ViewResult - view Index executed in 111.4544ms.
+2020-11-28 19:56:54.952 +03:00 [INF] Executed action WebApp.Controllers.HomeController.Index (WebApp) in 125.149ms
+2020-11-28 19:56:54.953 +03:00 [INF] Executed endpoint 'WebApp.Controllers.HomeController.Index (WebApp)'
+2020-11-28 19:56:54.956 +03:00 [INF] Request finished in 233.2182ms 200 text/html; charset=utf-8
+2020-11-28 19:56:55.129 +03:00 [INF] Request starting HTTP/2.0 POST https://localhost:44326/notification/negotiate?negotiateVersion=1 text/plain;charset=UTF-8 0
+2020-11-28 19:56:55.134 +03:00 [INF] Identity.Application was not authenticated. Failure message: Unprotect ticket failed
+2020-11-28 19:56:55.134 +03:00 [INF] Executing endpoint '/notification/negotiate'
+2020-11-28 19:56:55.144 +03:00 [INF] Executed endpoint '/notification/negotiate'
+2020-11-28 19:56:55.145 +03:00 [INF] Request finished in 16.9518ms 200 application/json
+2020-11-28 19:56:55.219 +03:00 [INF] Request starting HTTP/1.1 GET https://localhost:44326/notification?id=TWAcS3Qe7B1Uaku7dMdZnQ  
+2020-11-28 19:56:55.225 +03:00 [INF] Identity.Application was not authenticated. Failure message: Unprotect ticket failed
+2020-11-28 19:56:55.225 +03:00 [INF] Executing endpoint '/notification'
+2020-11-28 19:57:01.627 +03:00 [INF] Request starting HTTP/2.0 GET https://localhost:44326/lib/bootstrap/dist/js/bootstrap.bundle.min.js.map  
+2020-11-28 19:57:01.627 +03:00 [INF] Request starting HTTP/2.0 GET https://localhost:44326/js/microsoft/signalr/dist/browser/signalr.min.js.map  
+2020-11-28 19:57:01.628 +03:00 [INF] Request starting HTTP/2.0 GET https://localhost:44326/js/toastr/toastr.js.map  
+2020-11-28 19:57:01.629 +03:00 [INF] Identity.Application was not authenticated. Failure message: Unprotect ticket failed
+2020-11-28 19:57:01.629 +03:00 [INF] Identity.Application was not authenticated. Failure message: Unprotect ticket failed
+2020-11-28 19:57:01.634 +03:00 [INF] Identity.Application was not authenticated. Failure message: Unprotect ticket failed
+2020-11-28 19:57:01.634 +03:00 [INF] Identity.Application was not authenticated. Failure message: Unprotect ticket failed
+2020-11-28 19:57:01.634 +03:00 [INF] Executing endpoint 'WebApp.Controllers.HomeController.Error (WebApp)'
+2020-11-28 19:57:01.634 +03:00 [INF] Executing endpoint 'WebApp.Controllers.HomeController.Error (WebApp)'
+2020-11-28 19:57:01.641 +03:00 [INF] Request starting HTTP/2.0 GET https://localhost:44326/lib/bootstrap/dist/css/bootstrap.min.css.map  
+2020-11-28 19:57:01.650 +03:00 [INF] Route matched with {action = "Error", controller = "Home"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Error(Int32) on controller WebApp.Controllers.HomeController (WebApp).
+2020-11-28 19:57:01.650 +03:00 [INF] Route matched with {action = "Error", controller = "Home"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Error(Int32) on controller WebApp.Controllers.HomeController (WebApp).
+2020-11-28 19:57:01.672 +03:00 [INF] Sending file. Request path: '/lib/bootstrap/dist/js/bootstrap.bundle.min.js.map'. Physical path: 'C:\Users\sovsp\Desktop\IGI\WikiId\WebApp\wwwroot\lib\bootstrap\dist\js\bootstrap.bundle.min.js.map'
+2020-11-28 19:57:01.672 +03:00 [INF] Sending file. Request path: '/lib/bootstrap/dist/css/bootstrap.min.css.map'. Physical path: 'C:\Users\sovsp\Desktop\IGI\WikiId\WebApp\wwwroot\lib\bootstrap\dist\css\bootstrap.min.css.map'
+2020-11-28 19:57:01.673 +03:00 [INF] Request finished in 32.5518ms 200 text/plain
+2020-11-28 19:57:01.673 +03:00 [INF] Request finished in 47.2581ms 200 text/plain
+2020-11-28 19:57:01.674 +03:00 [INF] Executing ViewResult, running view Error.
+2020-11-28 19:57:01.674 +03:00 [INF] Executing ViewResult, running view Error.
+2020-11-28 19:57:01.682 +03:00 [INF] Executed ViewResult - view Error executed in 8.5264ms.
+2020-11-28 19:57:01.682 +03:00 [INF] Executed ViewResult - view Error executed in 8.5474ms.
+2020-11-28 19:57:01.682 +03:00 [INF] Executed action WebApp.Controllers.HomeController.Error (WebApp) in 31.7393ms
+2020-11-28 19:57:01.682 +03:00 [INF] Executed action WebApp.Controllers.HomeController.Error (WebApp) in 31.804ms
+2020-11-28 19:57:01.682 +03:00 [INF] Executed endpoint 'WebApp.Controllers.HomeController.Error (WebApp)'
+2020-11-28 19:57:01.682 +03:00 [INF] Executed endpoint 'WebApp.Controllers.HomeController.Error (WebApp)'
+2020-11-28 19:57:01.683 +03:00 [INF] Request finished in 55.0179ms 404 text/html; charset=utf-8
+2020-11-28 19:57:01.683 +03:00 [INF] Request finished in 56.9059ms 404 text/html; charset=utf-8
+2020-11-28 19:58:16.297 +03:00 [INF] Starting up
+2020-11-28 19:58:16.352 +03:00 [INF] User profile is available. Using 'C:\Users\sovsp\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2020-11-28 19:58:16.719 +03:00 [INF] Request starting HTTP/2.0 GET https://localhost:44326/  
+2020-11-28 19:58:16.789 +03:00 [INF] Identity.Application was not authenticated. Failure message: Unprotect ticket failed
+2020-11-28 19:58:16.791 +03:00 [INF] Executing endpoint 'WebApp.Controllers.HomeController.Index (WebApp)'
+2020-11-28 19:58:16.814 +03:00 [INF] Route matched with {action = "Index", controller = "Home"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Index() on controller WebApp.Controllers.HomeController (WebApp).
+2020-11-28 19:58:16.831 +03:00 [INF] Executing ViewResult, running view Index.
+2020-11-28 19:58:16.947 +03:00 [INF] Executed ViewResult - view Index executed in 120.3844ms.
+2020-11-28 19:58:16.949 +03:00 [INF] Executed action WebApp.Controllers.HomeController.Index (WebApp) in 134.6351ms
+2020-11-28 19:58:16.949 +03:00 [INF] Executed endpoint 'WebApp.Controllers.HomeController.Index (WebApp)'
+2020-11-28 19:58:16.951 +03:00 [INF] Request finished in 235.5847ms 200 text/html; charset=utf-8
+2020-11-28 19:58:17.115 +03:00 [INF] Request starting HTTP/2.0 POST https://localhost:44326/notification/negotiate?negotiateVersion=1 text/plain;charset=UTF-8 0
+2020-11-28 19:58:17.121 +03:00 [INF] Identity.Application was not authenticated. Failure message: Unprotect ticket failed
+2020-11-28 19:58:17.122 +03:00 [INF] Executing endpoint '/notification/negotiate'
+2020-11-28 19:58:17.130 +03:00 [INF] Executed endpoint '/notification/negotiate'
+2020-11-28 19:58:17.130 +03:00 [INF] Request finished in 15.7652ms 200 application/json
+2020-11-28 19:58:17.260 +03:00 [INF] Request starting HTTP/1.1 GET https://localhost:44326/notification?id=orzH4tAbtAaeXtfD2war0w  
+2020-11-28 19:58:17.266 +03:00 [INF] Identity.Application was not authenticated. Failure message: Unprotect ticket failed
+2020-11-28 19:58:17.266 +03:00 [INF] Executing endpoint '/notification'
