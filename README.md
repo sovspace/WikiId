@@ -5,12 +5,8 @@
 
 * Creation, browsing, editing, deletion [wiki-pages](https://ru.wikipedia.org/wiki/%D0%92%D0%B8%D0%BA%D0%B8)
 * Gallery on each page for media content
-* Access levels - global, group, personal
-* Pages grouped by themes
-* Tags on pages
-* History of page's changes
-* Any user may suggest revisions to creator and creator is notified of them
-* Group moderation
+* Access levels - edit, view and public
+* Notifications 
 
 ### Technical requirements:
 
