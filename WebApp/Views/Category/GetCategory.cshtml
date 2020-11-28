@@ -1,0 +1,31 @@
+﻿@model WebApp.ViewModels.CategoryViewModels.DetailedCategoryViewModel;
+
+
+@{
+    ViewData["Title"] = $"Category {Model.Title}";
+}
+
+
+<div class="container">
+    <div class="row mt-2">
+        <div class="col text-center">
+            <h1>Category @Model.Title</h1>
+            <hr>
+        </div>
+    </div>
+    @foreach (var item in Model.Articles)
+    {
+        <div class="row mb-2 alert align-items-center" style="background-color: lightgray; border-width: thin; border-color: white; border-radius: 30px;">
+            <div class="col-2 p-2"><img class="img-thumbnail" style="width: auto; height: 100px; border-radius: 15px" src="@Url.Content(item.TitleImagePath)"></div>
+            <div class="col-10">
+                <h1>
+                    <a href="@Url.ActionLink("GetArticle", "Article", new { id = item.Id})">@item.Title</a>
+                    <span class="badge badge-pill badge-danger align-self-center" style="font-size: 15px">Creation date @item.CreatedDate.ToShortDateString()</span>
+                    <span class="badge badge-pill badge-info" style="font-size: 15px">Updated date @item.UpdatedDate.ToShortDateString()</span>
+                    <span class="badge badge-pill badge-success" style="font-size: 15px">Creator @item.UserName</span>
+
+                </h1>
+            </div>
+        </div>
+    }
+</div>

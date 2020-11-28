@@ -1,0 +1,86 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"]</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&amp;display=swap">
+    <link rel="stylesheet" href="~/css/styles.css" />
+    <link rel="stylesheet" href="~/css/toastr/toastr.css">
+</head>
+
+
+<body>
+    <nav class="navbar navbar-light navbar-expand-sm navigation-clean-button" style="padding: 4px;background: rgb(40,45,50);">
+        <div class="container">
+            <a class="navbar-brand" href="@Url.ActionLink("Index", "Home")" style="font-size: 30px;color: rgb(255,255,255);">Wiki ID</a><button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse" id="navcol-1">
+                <ul class="nav navbar-nav mr-auto">
+
+                    @if (!User.Identity.IsAuthenticated)
+                    {
+                        <li class="nav-item"><a class="nav-link active" href="@Url.ActionLink("Index", "Article")" style="color: rgb(255,255,255);">Articles</a></li>
+                        <li class="nav-item"><a class="nav-link" href="@Url.ActionLink("Index", "Category")" style="color: rgb(255,255,255);">Categories</a></li>
+                    }
+                    else
+                    {
+                        <li class="nav-item dropdown show" style="color: #ffffff;">
+                            <a data-toggle="dropdown" aria-expanded="false" class="dropdown-toggle nav-link" href="#" style="color: rgb(255,255,255);">Articles</a>
+                            <div class="dropdown-menu" style="color: rgb(255,255,255);">
+                                <a class="dropdown-item" href="@Url.ActionLink("Create", "Article")">Create article</a>
+                                <a class="dropdown-item" href="@Url.ActionLink("Index", "Article")">Public articles</a>
+                                <a class="dropdown-item" href="@Url.ActionLink("Created", "Article")">Created articles</a>
+                                <a class="dropdown-item" href="@Url.ActionLink("Viewable", "Article")">Viewable articles</a>
+                                <a class="dropdown-item" href="@Url.ActionLink("Editable", "Article")">Editable articles</a>
+                            </div>
+                        </li>
+
+                        <li class="nav-item dropdown show" style="color: #ffffff;">
+                            <a data-toggle="dropdown" aria-expanded="false" class="dropdown-toggle nav-link" href="#" style="color: rgb(255,255,255);">Categories</a>
+                            <div class="dropdown-menu" style="color: rgb(255,255,255);">
+                                <a class="dropdown-item" href="@Url.ActionLink("Create", "Category")">Create category</a>
+                                <a class="dropdown-item" href="@Url.ActionLink("Index", "Category")">All categories</a>
+                            </div>
+                        </li>
+                    }
+
+                </ul>
+
+                @if (!User.Identity.IsAuthenticated)
+                {
+                    <span class="navbar-text actions">
+                        <input type="text" id="search-field-2" class="search-field" name="search" />
+                        <a class="btn" href="@Url.ActionLink("Login", "Account")" role="button" style="background: rgb(41,214,172); border-radius: 25px; margin-right: 10px;">Log in</a>
+                        <a class="btn" href="@Url.ActionLink("Register", "Account")" role="button" style="background: rgb(230,147,101); border-radius: 25px;margin-right: 10px;">Sign up</a>
+                    </span>
+                }
+                else
+                {
+                    <span class="navbar-text actions">
+                        <input type="text" id="search-field-2" class="search-field" name="search" />
+                        <a class="btn" href="@Url.ActionLink("Logout", "Account")" role="button" style="background-color:#f4ed7c; border-radius: 25px;margin-right: 10px;">Log out</a>
+                    </span>
+                }
+
+
+
+            </div>
+        </div>
+    </nav>
+
+    <main role="main" class="pb-3">
+        @RenderBody()
+    </main>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/js/microsoft/signalr/dist/browser/signalr.min.js" asp-append-version="true"></script>
+    <script src="~/js/notification.js"></script>
+    <script src="~/js/toastr/toastr.min.js"></script>
+
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

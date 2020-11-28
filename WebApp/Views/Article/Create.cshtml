@@ -1,0 +1,42 @@
+﻿@model WebApp.ViewModels.ArticleViewModels.CreateArticleViewModel
+
+@{
+    ViewData["Title"] = "Create article";
+}
+
+
+<h1 class="text-center p-2">Create article</h1>
+<div class="container">
+    <div class="row">
+        <div class="col-md-5 mx-auto">
+            <div class="card card-body">
+                <form method="post" enctype="multipart/form-data" asp-controller="Article" asp-action="Create">
+                    <div asp-validation-summary="ModelOnly"> </div>
+                    <div class="form-group required">
+                        <label asp-for="Title"></label><br />
+                        <input asp-for="Title" />
+                        <span asp-validation-for="Title"></span>
+                    </div>
+                    <div class="form-group required">
+                        <label asp-for="IsPublic"></label><br />
+                        <input asp-for="IsPublic" />
+                        <span asp-validation-for="IsPublic"></span>
+                    </div>
+                    <div class="form-group required">
+                        <label asp-for="CategoryId"></label>
+                        <select asp-for="CategoryId" asp-items="@Model.Categories"></select>
+                    </div>
+                    <div class="form-group required">
+                        <label asp-for="TitleImage"></label><br />
+                        <input type="file" asp-for="TitleImage" />
+                        <span asp-validation-for="TitleImage"></span>
+                    </div>
+                    <div class="form-group pt-1">
+                        <button class="btn btn-primary btn-block" type="submit">Create</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+

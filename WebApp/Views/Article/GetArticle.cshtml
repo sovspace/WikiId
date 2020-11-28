@@ -1,0 +1,114 @@
+﻿@using Domain.Enums
+@model WebApp.ViewModels.ArticleViewModels.DetailedArticleViewModel
+
+
+@{
+    ViewData["Title"] = Model.Title;
+}
+
+<div class="container">
+    <div class="row mt-2">
+        <div class="col p-3 align-items-center">
+            <h1>
+                @Model.Title <a href="@Url.ActionLink("GetCategory", "Category", new { Id = Model.CategoryId })" style="font-size: 15px" class="badge badge-pill badge-primary">@Model.CategoryTitle</a>
+                <span class="badge badge-pill badge-danger" style="font-size: 15px">Creation date @Model.CreatedDate.ToShortDateString()</span>
+                <span class="badge badge-pill badge-info" style="font-size: 15px">Updated date @Model.UpdatedDate.ToShortDateString()</span>
+                <span class="badge badge-pill badge-success" style="font-size: 15px">Creator @Model.UserName</span>
+            </h1>
+            <hr>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <a href="@Url.Action("Create", "Subarticle", new { articleId = Model.Id})"
+               class="btn btn-success btn-sm" type="button" style="height: 25px;font-size: 10px;">
+                Add subarticle
+            </a>
+            <a href="@Url.Action("Update", "Article", new { articleId = Model.Id})"
+               class="btn btn-warning btn-sm" type="button" style="margin-left: 10px;height: 25px;font-size: 10px;">
+                Update article
+            </a>
+            <button onclick="deleteArticle(@Model.Id)"
+               class="btn btn-danger btn-sm" type="button" style="margin-left: 10px;height: 25px;font-size: 10px;">
+                Delete 
+            </button>
+            <button onclick="makeEditAccessRequest(@Model.Id)"
+               class="btn btn-info btn-sm" type="button" style="margin-left: 10px;height: 25px;font-size: 10px;">
+                Make edit access request
+            </button>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col text-center" style="padding: 10px;">
+            <img class="img-responsive" src="@Url.Content(Model.TitleImagePath)" style="max-width: 500px; height: auto;">
+        </div>
+    </div>
+    @foreach (var subarticle in Model.Subarticles)
+    {
+        <div class="row">
+            <div class="col">
+                <h1>@subarticle.Title</h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <p>@subarticle.Content</p>
+            </div>
+        </div>
+    }
+
+    @if (Model.GalleryPaths.Any())
+    {
+        <div class="row">
+            <div class="col">
+                <h1>Gallery</h1>
+            </div>
+        </div>
+        @foreach (var path in Model.GalleryPaths)
+        {
+            <div class="row">
+                <div class="col">
+                    <img class="img-responsive" src="@Url.Content(path)" style="max-width: 500px; height: auto;">
+                </div>
+            </div>
+        }
+    }
+</div>
+
+
+@section Scripts{
+    <script>
+        function deleteArticle(articleId) {
+            var raw_url = '@Html.Raw(Url.Action("Delete", "Article",
+                    new { articleId = "__articleId__"}))'
+            var url = raw_url.replace('__articleId__', articleId)
+            $.ajax({
+                type: "POST",
+                url: url,
+                success: function (result) {
+                    location.href = "@Url.ActionLink("Index", "Article")";
+                },
+                error: function (result) {
+                    toastr.error(result.responseJSON.message);
+                }
+            });
+        }
+        function makeEditAccessRequest(articleId) {
+            var raw_url = '@Html.Raw(Url.Action("Create", "Access",
+                    new { articleId = "__articleId__", accessType = AccessType.Edit}))'
+            var url = raw_url.replace('__articleId__', articleId)
+            $.ajax({
+                type: "POST",
+                url: url,
+                success: function (result) {
+                    toastr.success(result.responseJSON.message);
+                },
+                error: function (result) {
+                    toastr.error(result.responseJSON.message);
+                }
+            });
+        }
+    </script>
+}
+

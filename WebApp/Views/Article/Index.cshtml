@@ -1,0 +1,32 @@
+﻿@model IEnumerable<WebApp.ViewModels.ArticleViewModels.ArticleViewModel>
+
+@{
+    ViewData["Title"] = "Articles";
+}
+
+
+
+<div class="container">
+    <div class="row mt-2">
+        <div class="col text-center">
+            <h1>Public articles</h1>
+            <hr>
+        </div>
+    </div>
+    @foreach (var item in Model)
+    {
+        <div class="row mb-2 alert align-items-center" style="background-color: lightgray; border-width: thin; border-color: white; border-radius: 30px;">
+            <div class="col-2 p-2"><img class="img-thumbnail" style="width: auto; height: 100px; border-radius: 15px" src="@Url.Content(item.TitleImagePath)"></div>
+            <div class="col-8 align-self-center">
+                <a class="text-left mr-auto" href="@Url.ActionLink("GetArticle", "Article", new { id = item.Id})" style="font-size: 50px;">@item.Title</a>
+
+            </div>
+            <div class="col-2 align-self-center">
+                <a href="@Url.ActionLink("GetCategory", "Category", new { Id = item.CategoryId })" style="font-size: 15px" class="badge badge-pill badge-primary">@item.CategoryTitle</a>
+                <span class="badge badge-pill badge-danger" style="font-size: 12px">Creation date @item.CreatedDate.ToShortDateString()</span>
+                <span class="badge badge-pill badge-info" style="font-size: 12px">Updated date @item.UpdatedDate.ToShortDateString()</span>
+                <span class="badge badge-pill badge-success" style="font-size: 12px">Creator @item.UserName</span>
+            </div>
+        </div>
+    }
+</div>

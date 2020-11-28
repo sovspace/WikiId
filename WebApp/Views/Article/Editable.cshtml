@@ -1,0 +1,73 @@
+﻿@model IEnumerable<WebApp.ViewModels.ArticleViewModels.ArticleViewModel>
+
+@{
+    ViewData["Title"] = " Editable articles";
+}
+
+
+
+<div class="container">
+    <div class="row mt-2">
+        <div class="col text-center">
+            <h1>Editable articles</h1>
+            <hr>
+        </div>
+    </div>
+    @foreach (var item in Model)
+    {
+        <div class="row mb-2 alert align-items-center" style="background-color: lightgray; border-width: thin; border-color: white; border-radius: 30px;">
+            <div class="col-2 p-2"><img class="img-thumbnail" style="width: auto; height: 100px; border-radius: 15px" src="@Url.Content(item.TitleImagePath)"></div>
+            <div class="col-8 align-self-center">
+                <h1>
+                    <a href="@Url.ActionLink("GetArticle", "Article", new { id = item.Id})" style="font-size: 40px;">
+                        @item.Title
+                    </a>
+
+                    <a href="@Url.ActionLink("Update", "Article", new { articleId = item.Id})"
+                       class="btn btn-warning" style="margin-left: 5px;height: 25px;font-size: 10px; border-radius: 15px; text-align:center;">
+                        Update article
+                    </a>
+
+                    <a href="@Url.ActionLink("Create", "Subarticle", new { articleId = item.Id})"
+                       class="btn btn-success" style="margin-left: 5px;height: 25px;font-size: 10px; border-radius: 15px; text-align:center;">
+                        Create subarticle
+                    </a>
+
+                    <button onclick="deleteArticle(@item.Id)"
+                       class="btn btn-danger" style="margin-left: 5px;height: 25px;font-size: 10px; border-radius: 15px; text-align:center;">
+                        Delete article
+                    </button>
+
+                    
+                </h1>
+            </div>
+            <div class="col-2 align-self-center">
+                <a href="@Url.ActionLink("GetCategory", "Category", new { Id = item.CategoryId })" style="font-size: 15px" class="badge badge-pill badge-primary">@item.CategoryTitle</a>
+                <span class="badge badge-pill badge-danger" style="font-size: 12px">Creation date @item.CreatedDate.ToShortDateString()</span>
+                <span class="badge badge-pill badge-info" style="font-size: 12px">Updated date @item.UpdatedDate.ToShortDateString()</span>
+                <span class="badge badge-pill badge-success" style="font-size: 12px">Creator @item.UserName</span>
+            </div>
+        </div>
+    }
+</div>
+
+
+@section Scripts{ 
+    <script>
+        function deleteArticle(articleId) {
+            var raw_url = '@Html.Raw(Url.Action("Delete", "Article", new { articleId = "__articleId__" }))'
+            var url = raw_url.replace('__articleId__', articleId);
+
+            $.ajax({
+                type: "POST",
+                url: url,
+                success: function (result) {
+                    toastr.success(result.responseJSON.message);
+                },
+                error: function (result) {
+                    toastr.error(result.responseJSON.message);
+                }
+            });
+        }
+    </script>
+}
