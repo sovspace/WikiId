@@ -15,7 +15,7 @@ using static Application.Features.AccessRequstFeatures.Commands.DeleteAccessRequ
 
 namespace ApplicationTests
 {
-    public class AccessRequestCommandContextFixture : BaseContextFixture
+    public class AccessRequestCreateCommandContextFixture : BaseContextFixture
     {
         public override void SeedDataAsync()
         {
@@ -28,23 +28,25 @@ namespace ApplicationTests
             Context.Articles.Add(new Article { Id = 2, EditRoleString = "edit_2", ViewRoleString = "view_2"});
             Context.Articles.Add(new Article { Id = 3, EditRoleString = "edit_3", ViewRoleString = "view_3"});
 
-            // Delete data
+            Context.SaveChangesAsync();
+        }
+    }
+
+    public class AccessRequestDeleteCommandContextFixture : BaseContextFixture
+    {
+        public override void SeedDataAsync()
+        {
             Profile p5 = new Profile { IdentityUserId = "5" };
             Context.Profiles.Add(p5);
             Profile p6 = new Profile { IdentityUserId = "6" };
             Context.Profiles.Add(p6);
-
             Article a5 = new Article { Id = 5, EditRoleString = "edit_5", ViewRoleString = "view_5", Creator = p5 };
-
             Context.Articles.Add(a5);
-
             Article a6 = new Article { Id = 6, EditRoleString = "edit_6", ViewRoleString = "view_6", Creator = p6 };
             Context.Articles.Add(a6);
-
             Profile p7 = new Profile { IdentityUserId = "7" };
             Context.Profiles.Add(p7);
             Context.AccessRequests.Add(new AccessRequest { Id = 5, Profile = p7, Article = a5 });
-
             Profile p8 = new Profile { IdentityUserId = "8" };
             Context.Profiles.Add(p8);
             Context.AccessRequests.Add(new AccessRequest { Id = 6, Profile = p8, Article = a6 });
@@ -53,12 +55,16 @@ namespace ApplicationTests
         }
     }
 
-    public class AccessRequestCommandTests : IClassFixture<AccessRequestCommandContextFixture>
+    public class AccessRequestCommandTests : IClassFixture<AccessRequestCreateCommandContextFixture>, 
+        IClassFixture<AccessRequestDeleteCommandContextFixture>
     {
-        private readonly AccessRequestCommandContextFixture _fixture;
-        public AccessRequestCommandTests(AccessRequestCommandContextFixture fixture)
+        private readonly AccessRequestCreateCommandContextFixture _createFixture;
+        private readonly AccessRequestDeleteCommandContextFixture _deleteFixture;
+        public AccessRequestCommandTests(AccessRequestCreateCommandContextFixture createFixture, 
+            AccessRequestDeleteCommandContextFixture deleteFixture)
         {
-            _fixture = fixture;
+            _createFixture = createFixture;
+            _deleteFixture = deleteFixture;
         }
 
         public static IEnumerable<object[]> CreateAccessRequestCommandCases =>
@@ -66,7 +72,7 @@ namespace ApplicationTests
             {
                 new object[] {"1", new List<string>{"some_role", "view_1"}, 1, AccessType.Edit, 
                     new CreateAccessRequestResponse { IsSuccessful = true, Message = "Ok"} },
-                new object[] {"5", new List<string>{"some_role", "view_1"}, 1, AccessType.Edit,
+                new object[] {"10", new List<string>{"some_role", "view_1"}, 1, AccessType.Edit,
                     new CreateAccessRequestResponse {IsSuccessful = false, Message = "Profile not found"} },
                 new object[] {"3", new List<string> {"edit_2", "some_role"}, 2, AccessType.Edit,
                     new CreateAccessRequestResponse {IsSuccessful = false, Message = "You have already this role"} },
@@ -87,7 +93,7 @@ namespace ApplicationTests
                 ArticleId = articleId,
                 AccessType = accessType,
             };
-            CreateAccessRequestCommandHandler handler = new CreateAccessRequestCommandHandler(_fixture.Context);
+            CreateAccessRequestCommandHandler handler = new CreateAccessRequestCommandHandler(_createFixture.Context);
             CreateAccessRequestResponse expectedResult = await handler.Handle(request, new System.Threading.CancellationToken());
 
             Assert.Equal(expectedResult.IsSuccessful, result.IsSuccessful);
@@ -117,7 +123,7 @@ namespace ApplicationTests
                 AccessRequstId = accessRequestId,
                 IdentityUserId = identityUserId,
             };
-            DeleteAccessRequestCommandHandler handler = new DeleteAccessRequestCommandHandler(_fixture.Context);
+            DeleteAccessRequestCommandHandler handler = new DeleteAccessRequestCommandHandler(_deleteFixture.Context);
             DeleteAccessRequestResponse expectedResult = await handler.Handle(request, new System.Threading.CancellationToken());
 
             Assert.Equal(expectedResult.IsSuccessful, result.IsSuccessful);

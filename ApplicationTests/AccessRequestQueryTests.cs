@@ -8,48 +8,50 @@ using Xunit;
 namespace ApplicationTests
 {
 
-    class AccessRequestQueryContextFixture : BaseContextFixture
-    {
-        public override void SeedDataAsync()
-        {
-            Profile creator1 = new Profile { IdentityUserId = "1" };
-            Profile creator2 = new Profile { IdentityUserId = "2" };
+    /*  class AccessRequestQueryContextFixture : BaseContextFixture
+      {
 
-            Context.Profiles.Add(creator1);
-            Context.Profiles.Add(creator2);
+          public override void SeedDataAsync()
+          {
+              Profile creator1 = new Profile { IdentityUserId = "1" };
+              Profile creator2 = new Profile { IdentityUserId = "2" };
 
-            Article article1 = new Article { Creator = creator1, };
+              Context.Profiles.Add(creator1);
+              Context.Profiles.Add(creator2);
 
-
-
-            // AccessRequest accessRequest1 = new Pro
+              Article article1 = new Article { Creator = creator1, };
 
 
-            Context.SaveChangesAsync();
-        }
-    }
 
-    public class AccessRequestQueryTests : IClassFixture<AccessRequestQueryContextFixture>
-    {
-        private readonly AccessRequestCommandContextFixture _fixture;
-        public AccessRequestQueryTests(AccessRequestCommandContextFixture fixture)
-        {
-            fixture = _fixture;
-        }
-
-        public static IEnumerable<object[]> GetAccessRequestByIdQueryCases =>
-            new List<object[]>
-            {
-                new object[] { 1, 2},
-            };
+              // AccessRequest accessRequest1 = new Pro
 
 
-        [Theory]
-        [MemberData(nameof(GetAccessRequestByIdQueryCases))]
-        public void GetAccessRequestByIdQueryTest(string identityUserId, int accessRequestId, AccessRequest result)
-        {
+              Context.SaveChangesAsync();
+          }
+      }
 
-        }
+      public class AccessRequestQueryTests : IClassFixture<AccessRequestQueryContextFixture>
+      {
+          private readonly AccessRequestCreateCommandContextFixture _fixture;
+          public AccessRequestQueryTests(AccessRequestCreateCommandContextFixture fixture)
+          {
+              fixture = _fixture;
+          }
 
-    }
+          public static IEnumerable<object[]> GetAccessRequestByIdQueryCases =>
+              new List<object[]>
+              {
+                  new object[] { 1, 2},
+              };
+
+
+          [Theory]
+          [MemberData(nameof(GetAccessRequestByIdQueryCases))]
+          public void GetAccessRequestByIdQueryTest(string identityUserId, int accessRequestId, AccessRequest result)
+          {
+
+          }
+
+      }
+      */
 }
