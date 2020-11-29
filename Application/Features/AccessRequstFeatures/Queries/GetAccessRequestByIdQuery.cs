@@ -9,17 +9,17 @@ using System.Threading.Tasks;
 
 namespace Application.Features.AccessRequstFeatures.Queries
 {
-    public class GetAccessRequestByIdCommand : IRequest<AccessRequest>
+    public class GetAccessRequestByIdQuery : IRequest<AccessRequest>
     {
         public string IdentityUserId { get; set; }
         public int AccessRequestId { get; set; }
-        public class GetAccessRequestByIdCommandHandler : BaseHandler, IRequestHandler<GetAccessRequestByIdCommand, AccessRequest>
+        public class GetAccessRequestByIdCommandHandler : BaseHandler, IRequestHandler<GetAccessRequestByIdQuery, AccessRequest>
         {
             public GetAccessRequestByIdCommandHandler(IApplicationDbContext context) : base(context)
             {
             }
 
-            public async Task<AccessRequest> Handle(GetAccessRequestByIdCommand request, CancellationToken cancellationToken)
+            public async Task<AccessRequest> Handle(GetAccessRequestByIdQuery request, CancellationToken cancellationToken)
             {
                 AccessRequest accessRequest = await _context.AccessRequests
                     .Where(ac => ac.Id == request.AccessRequestId)

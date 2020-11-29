@@ -10,11 +10,9 @@ using System.Threading.Tasks;
 
 namespace Persistence
 {
-    class ApplicationDbContext : IdentityDbContext<IdentityUser>, IApplicationDbContext
+    public class ApplicationDbContext : IdentityDbContext<IdentityUser>, IApplicationDbContext
     {
-
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) { }
-
         public DbSet<Article> Articles { get; set; }
         public DbSet<Subarticle> Subarticles { get; set; }
         public DbSet<Category> Categories { get; set; }

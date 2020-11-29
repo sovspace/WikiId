@@ -27,7 +27,7 @@ namespace Application.Features.AccessRequstFeatures.Commands
 
             public async Task<CreateAccessRequestResponse> Handle(CreateAccessRequestCommand request, CancellationToken cancellationToken)
             {
-                Article article = await _context.Articles.Where(a => a.Id == request.ArticleId).SingleOrDefaultAsync();
+                Article article = await _context.Articles.FindAsync(request.ArticleId);
                 if (article == null)
                 {
                     return new CreateAccessRequestResponse
@@ -48,7 +48,7 @@ namespace Application.Features.AccessRequstFeatures.Commands
                 }
 
 
-                Profile profile = await _context.Profiles.Where(p => p.IdentityUserId == request.IdentityUserId).SingleOrDefaultAsync();
+                Profile profile = await _context.Profiles.Where(p => p.IdentityUserId == request.IdentityUserId).FirstOrDefaultAsync();
                 if (profile == null)
                 {
                     return new CreateAccessRequestResponse

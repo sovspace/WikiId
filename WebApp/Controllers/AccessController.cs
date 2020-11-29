@@ -35,7 +35,7 @@ namespace WebApp.Controllers
                 UserRoles = await _userManager.GetRolesAsync(identityUser)
             });
             HttpStatusCode statusCode = mediatorResult.IsSuccessful ? HttpStatusCode.OK : HttpStatusCode.MethodNotAllowed;
-            return new JsonResult(mediatorResult.Message)
+            return new JsonResult(new { mediatorResult.Message })
             {
                 StatusCode = (int)statusCode,
             };
@@ -47,7 +47,7 @@ namespace WebApp.Controllers
         public async Task<JsonResult> ApproveAccessRequest(int accessRequestId)
         {
             var currentUser = await _userManager.GetUserAsync(HttpContext.User);
-            AccessRequest accessRequest = await Mediator.Send(new GetAccessRequestByIdCommand
+            AccessRequest accessRequest = await Mediator.Send(new GetAccessRequestByIdQuery
             {
                 AccessRequestId = accessRequestId,
                 IdentityUserId = currentUser.Id
