@@ -12,27 +12,37 @@ namespace Application.Features.ProfileFeatures.Commands
 {
 
 
-    public class DeleteProfileCommand : IRequest<DeleteCommandResponse>
+    public class DeleteProfileCommand : IRequest<DeleteProfileResponse>
     {
         public string IdentityUserId { get; set; }
 
-        public class DeleteProfileCommandHandler : BaseHandler, IRequestHandler<DeleteProfileCommand, DeleteCommandResponse>
+        public class DeleteProfileCommandHandler : BaseHandler, IRequestHandler<DeleteProfileCommand, DeleteProfileResponse>
         {
             public DeleteProfileCommandHandler(IApplicationDbContext context) : base(context)
             {
             }
 
-            public async Task<DeleteCommandResponse> Handle(DeleteProfileCommand request, CancellationToken cancellationToken)
+            public async Task<DeleteProfileResponse> Handle(DeleteProfileCommand request, CancellationToken cancellationToken)
             {
                 Profile profile = await _context.Profiles.Where(p => p.IdentityUserId == request.IdentityUserId).SingleOrDefaultAsync();
-                _context.Profiles.Remove(profile);
-                await _context.SaveChangesAsync();
-
-                return new DeleteCommandResponse
+                if (profile != null)
                 {
-                    IsSuccessful = true,
-                    Id = profile.Id,
-                };
+                    _context.Profiles.Remove(profile);
+                    await _context.SaveChangesAsync();
+
+                    return new DeleteProfileResponse
+                    {
+                        IsSuccessful = true,
+                        Id = profile.Id,
+                    };
+                } else
+                {
+                    return new DeleteProfileResponse
+                    {
+                        IsSuccessful = false,
+                        Message = "Profile not found",
+                    };
+                }
             }
         }
 

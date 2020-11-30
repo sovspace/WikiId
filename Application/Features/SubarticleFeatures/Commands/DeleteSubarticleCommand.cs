@@ -23,7 +23,9 @@ namespace Application.Features.SubarticleFeatures.Commands
 
             public async Task<DeleteSubarticleResponse> Handle(DeleteSubarticleCommand request, CancellationToken cancellationToken)
             {
-                Subarticle subarticle = await _context.Subarticles.Where(s => s.Id == request.SubarticleId).SingleOrDefaultAsync();
+                Subarticle subarticle = await _context.Subarticles
+                    .Include(s => s.Article)
+                    .Where(s => s.Id == request.SubarticleId).SingleOrDefaultAsync();
 
                 if (subarticle == null)
                 {
@@ -50,7 +52,7 @@ namespace Application.Features.SubarticleFeatures.Commands
                         return new DeleteSubarticleResponse
                         {
                             IsSuccessful = false,
-                            Message = "Can delete this subarticle",
+                            Message = "Can't delete subarticle",
                         };
                     }
                 }

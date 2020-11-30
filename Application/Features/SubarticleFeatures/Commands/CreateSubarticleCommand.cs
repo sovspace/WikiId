@@ -60,7 +60,7 @@ namespace Application.Features.SubarticleFeatures.Commands
                     return new CreateSubarticleResponse
                     {
                         IsSuccessful = false,
-                        Message = "Can edit article",
+                        Message = "Can't edit article",
                     };
                 }
             }

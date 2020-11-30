@@ -15,9 +15,9 @@ namespace Application.Features.ArticleFeatures.Queries
     {
         public IEnumerable<string> UserRoles { get; set; }
 
-        public class GetEditableArticlesQueryHandle : BaseHandler, IRequestHandler<GetEditableArticlesQuery, IEnumerable<Article>>
+        public class GetEditableArticlesQueryHandler : BaseHandler, IRequestHandler<GetEditableArticlesQuery, IEnumerable<Article>>
         {
-            public GetEditableArticlesQueryHandle(IApplicationDbContext context) : base(context)
+            public GetEditableArticlesQueryHandler(IApplicationDbContext context) : base(context)
             {
             }
 

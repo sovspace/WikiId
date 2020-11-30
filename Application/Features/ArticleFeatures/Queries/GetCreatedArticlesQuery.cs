@@ -14,9 +14,9 @@ namespace Application.Features.ArticleFeatures.Queries
     {
         public string IdentityUserId { get; set; }
 
-        public class GetCrearedArticleQueryHandler : BaseHandler, IRequestHandler<GetCreatedArticlesQuery, IEnumerable<Article>>
+        public class GetCreatedArticlesQueryHandler : BaseHandler, IRequestHandler<GetCreatedArticlesQuery, IEnumerable<Article>>
         {
-            public GetCrearedArticleQueryHandler(IApplicationDbContext context) : base(context)
+            public GetCreatedArticlesQueryHandler(IApplicationDbContext context) : base(context)
             {
             }
 

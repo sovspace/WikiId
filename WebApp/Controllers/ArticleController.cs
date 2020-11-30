@@ -229,7 +229,7 @@ namespace WebApp.Controllers
                 var currentUser = await _userManager.GetUserAsync(HttpContext.User);
                 var userRoles = await _userManager.GetRolesAsync(currentUser);
                 string path = model.TitleImage == null ? null : "/files/article/title_image/" + model.TitleImage.FileName;
-                var result = await Mediator.Send(new UpdateArcticleCommand
+                var result = await Mediator.Send(new UpdateArticleCommand
                 {
                     Title = model.Title,
                     IsPublic = model.IsPublic,

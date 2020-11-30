@@ -15,9 +15,9 @@ namespace Application.Features.ArticleFeatures.Commands
         public int Id { get; set; }
         public string IdentityUserId { get; set; }
 
-        public class DeleteArticleByIdCommandHandler : BaseHandler, IRequestHandler<DeleteArticleCommand, DeleteArticleResponse>
+        public class DeleteArticleCommandHandler : BaseHandler, IRequestHandler<DeleteArticleCommand, DeleteArticleResponse>
         {
-            public DeleteArticleByIdCommandHandler(IApplicationDbContext context) : base(context)
+            public DeleteArticleCommandHandler(IApplicationDbContext context) : base(context)
             {
             }
 
@@ -43,7 +43,7 @@ namespace Application.Features.ArticleFeatures.Commands
                         return new DeleteArticleResponse
                         {
                             IsSuccessful = false,
-                            Message = "Can delete article",
+                            Message = "Can't delete article",
                         };
                     }
                     else

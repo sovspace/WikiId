@@ -12,9 +12,9 @@ namespace Application.Features.ArticleFeatures.Queries
 {
     public class GetPublicArticlesQuery : IRequest<IEnumerable<Article>>
     {
-        public class GetPublicArticlesQueryHandle : BaseHandler, IRequestHandler<GetPublicArticlesQuery, IEnumerable<Article>>
+        public class GetPublicArticlesQueryHandler : BaseHandler, IRequestHandler<GetPublicArticlesQuery, IEnumerable<Article>>
         {
-            public GetPublicArticlesQueryHandle(IApplicationDbContext context) : base(context)
+            public GetPublicArticlesQueryHandler(IApplicationDbContext context) : base(context)
             {
             }
 

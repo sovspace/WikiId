@@ -34,7 +34,7 @@ namespace Application.Features.ArticleFeatures.Commands
                     return new CreateArticleResponse
                     {
                         IsSuccessful = false,
-                        Message = "There is no category"
+                        Message = "No category found"
                     };
                 }
 
@@ -44,7 +44,7 @@ namespace Application.Features.ArticleFeatures.Commands
                     return new CreateArticleResponse
                     {
                         IsSuccessful = false,
-                        Message = "There is no user"
+                        Message = "No user found"
                     };
                 }
 

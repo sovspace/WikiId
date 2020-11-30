@@ -3,19 +3,14 @@ using Application.Features.AccessRequstFeatures.Responses;
 using ApplicationTests.Common;
 using Domain.Entities;
 using Domain.Enums;
-using Microsoft.EntityFrameworkCore;
-using Persistence;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using Xunit;
 using static Application.Features.AccessRequstFeatures.Commands.CreateAccessRequestCommand;
 using static Application.Features.AccessRequstFeatures.Commands.DeleteAccessRequestCommand;
 
 namespace ApplicationTests
 {
-    public class AccessRequestCreateCommandContextFixture : BaseContextFixture
+    public class CreateAccessRequestCommandContextFixture : BaseContextFixture
     {
         public override void SeedDataAsync()
         {
@@ -24,9 +19,9 @@ namespace ApplicationTests
             Context.Profiles.Add(new Profile { IdentityUserId = "2" });
             Context.Profiles.Add(new Profile { IdentityUserId = "3" });
 
-            Context.Articles.Add(new Article { Id = 1, EditRoleString = "edit_1", ViewRoleString = "view_1"});
-            Context.Articles.Add(new Article { Id = 2, EditRoleString = "edit_2", ViewRoleString = "view_2"});
-            Context.Articles.Add(new Article { Id = 3, EditRoleString = "edit_3", ViewRoleString = "view_3"});
+            Context.Articles.Add(new Article { Id = 1, EditRoleString = "edit_1", ViewRoleString = "view_1" });
+            Context.Articles.Add(new Article { Id = 2, EditRoleString = "edit_2", ViewRoleString = "view_2" });
+            Context.Articles.Add(new Article { Id = 3, EditRoleString = "edit_3", ViewRoleString = "view_3" });
 
             Context.SaveChangesAsync();
         }
@@ -55,22 +50,22 @@ namespace ApplicationTests
         }
     }
 
-    public class AccessRequestCommandTests : IClassFixture<AccessRequestCreateCommandContextFixture>, 
-        IClassFixture<AccessRequestDeleteCommandContextFixture>
+    public class CreateAccessRequestCommandTests : IClassFixture<AccessRequestDeleteCommandContextFixture>, IClassFixture<CreateAccessRequestCommandContextFixture>
     {
-        private readonly AccessRequestCreateCommandContextFixture _createFixture;
+        private readonly CreateAccessRequestCommandContextFixture _createFixture;
         private readonly AccessRequestDeleteCommandContextFixture _deleteFixture;
-        public AccessRequestCommandTests(AccessRequestCreateCommandContextFixture createFixture, 
-            AccessRequestDeleteCommandContextFixture deleteFixture)
+
+
+        public CreateAccessRequestCommandTests(CreateAccessRequestCommandContextFixture createFixture, AccessRequestDeleteCommandContextFixture deleteFixture)
         {
             _createFixture = createFixture;
             _deleteFixture = deleteFixture;
         }
 
         public static IEnumerable<object[]> CreateAccessRequestCommandCases =>
-            new List<object[]> 
+            new List<object[]>
             {
-                new object[] {"1", new List<string>{"some_role", "view_1"}, 1, AccessType.Edit, 
+                new object[] {"1", new List<string>{"some_role", "view_1"}, 1, AccessType.Edit,
                     new CreateAccessRequestResponse { IsSuccessful = true, Message = "Ok"} },
                 new object[] {"10", new List<string>{"some_role", "view_1"}, 1, AccessType.Edit,
                     new CreateAccessRequestResponse {IsSuccessful = false, Message = "Profile not found"} },
@@ -83,7 +78,7 @@ namespace ApplicationTests
 
         [Theory]
         [MemberData(nameof(CreateAccessRequestCommandCases))]
-        public async System.Threading.Tasks.Task CreateAccessRequestCommandTestAsync(string identityUserId, IEnumerable<string> userRoles, 
+        public async System.Threading.Tasks.Task CreateAccessRequestCommandTestAsync(string identityUserId, IEnumerable<string> userRoles,
             int articleId, AccessType accessType, CreateAccessRequestResponse result)
         {
             CreateAccessRequestCommand request = new CreateAccessRequestCommand
@@ -129,7 +124,9 @@ namespace ApplicationTests
             Assert.Equal(expectedResult.IsSuccessful, result.IsSuccessful);
             Assert.Equal(expectedResult.Message, result.Message);
         }
-
-
     }
+
+
+
+
 }

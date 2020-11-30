@@ -32,7 +32,7 @@ namespace Application.Features.CategoryFeatures.Commands
                     return new DeleteCategoryResponse
                     {
                         IsSuccessful = false,
-                        Message = "No categoty found"
+                        Message = "No category found"
                     };
                 }
                 else
@@ -53,7 +53,7 @@ namespace Application.Features.CategoryFeatures.Commands
                         return new DeleteCategoryResponse
                         {
                             IsSuccessful = false,
-                            Message = "Can delete this category",
+                            Message = "Can't delete category",
                         };
                     }
                 }

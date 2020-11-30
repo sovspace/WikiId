@@ -26,14 +26,16 @@ namespace Application.Features.SubarticleFeatures.Commands
 
             public async Task<UpdateSubarticleResponse> Handle(UpdateSubarticleCommand request, CancellationToken cancellationToken)
             {
-                Subarticle subarticle = await _context.Subarticles.Where(s => s.Id == request.SubarticleId).SingleOrDefaultAsync();
+                Subarticle subarticle = await _context.Subarticles
+                    .Include(s => s.Article)
+                    .Where(s => s.Id == request.SubarticleId).SingleOrDefaultAsync();
 
                 if (subarticle == null)
                 {
                     return new UpdateSubarticleResponse
                     {
                         IsSuccessful = false,
-                        Message = "Subarticle not found",
+                        Message = "No subarticle found",
                     };
                 }
 

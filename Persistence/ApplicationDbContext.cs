@@ -44,7 +44,7 @@ namespace Persistence
             modelBuilder.Entity<Category>().HasIndex(c => c.Title).IsUnique();
             modelBuilder.Entity<Subarticle>();
             modelBuilder.Entity<MediaFile>();
-            modelBuilder.Entity<AccessRequest>().HasIndex(ac => new { ac.ArticleId, ac.ProfileId }).IsUnique();
+            modelBuilder.Entity<AccessRequest>().HasIndex(ac => new { ac.ArticleId, ac.ProfileId, ac.AccessType }).IsUnique();
             modelBuilder.Entity<Profile>();
 
 

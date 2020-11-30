@@ -4,6 +4,6 @@ namespace Application.Features.ArticleFeatures.Responses
 {
     public class UpdateArticleResponse : BaseResponse
     {
-        public int Id { get; set; }
+        public int ArticleId { get; set; }
     }
 }
