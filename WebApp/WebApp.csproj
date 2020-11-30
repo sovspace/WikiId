@@ -28,7 +28,9 @@
 
   <ItemGroup>
     <Folder Include="wwwroot\files\article\title_image\" />
+    <Folder Include="wwwroot\files\article\gallery\" />
     <Folder Include="wwwroot\files\category\title\" />
+    <Folder Include="wwwroot\files\category\title_image\" />
   </ItemGroup>
 
 </Project>

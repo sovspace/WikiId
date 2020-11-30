@@ -1,6 +1,7 @@
 ﻿using Application.Features.ArticleFeatures.Commands;
 using Application.Features.ArticleFeatures.Queries;
 using Application.Features.CategoryFeatures.Queries;
+using FileSaverService.Service;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
@@ -22,12 +23,16 @@ namespace WebApp.Controllers
     public class ArticleController : BaseController
     {
         private readonly RoleManager<IdentityRole> _roleManager;
+        private readonly IFileSaver _fileSaver;
         private readonly IWebHostEnvironment _appEnvironment;
+
         public ArticleController(UserManager<IdentityUser> userManager,
             RoleManager<IdentityRole> roleManager,
+            IFileSaver fileSaver,
             IWebHostEnvironment appEnvironment) : base(userManager)
         {
             _roleManager = roleManager;
+            _fileSaver = fileSaver;
             _appEnvironment = appEnvironment;
         }
 
@@ -154,7 +159,20 @@ namespace WebApp.Controllers
             if (ModelState.IsValid)
             {
                 var currentUser = await _userManager.GetUserAsync(HttpContext.User);
-                string path = model.TitleImage == null ? "/img/no_image.jpg" : "/files/article/title_image/" + model.TitleImage.FileName;
+
+                string path = "/img/no_image.jpg";
+                if (model.TitleImage != null)
+                {
+                    FileSaverResult fileSaverResult = await _fileSaver.SaveArticleTitleImage(_appEnvironment.WebRootPath, model.TitleImage);
+                    if (fileSaverResult.IsSuccessful)
+                    {
+                        path = fileSaverResult.Path;
+                    }
+                    else
+                    {
+                        ModelState.AddModelError("", "Can't save image");
+                    }
+                }
 
                 var result = await Mediator.Send(new CreateArticleCommand
                 {
@@ -167,13 +185,6 @@ namespace WebApp.Controllers
 
                 if (result.IsSuccessful)
                 {
-                    if (model.TitleImage != null)
-                    {
-                        using (var fileStream = new FileStream(_appEnvironment.WebRootPath + path, FileMode.Create))
-                        {
-                            await model.TitleImage.CopyToAsync(fileStream);
-                        }
-                    }
                     var editArticleRoleResult = await _roleManager.CreateAsync(new IdentityRole(result.EditArticleRoleName));
                     var viewArticleRoleResult = await _roleManager.CreateAsync(new IdentityRole(result.ViewArticleRoleName));
 
@@ -228,7 +239,20 @@ namespace WebApp.Controllers
             {
                 var currentUser = await _userManager.GetUserAsync(HttpContext.User);
                 var userRoles = await _userManager.GetRolesAsync(currentUser);
-                string path = model.TitleImage == null ? null : "/files/article/title_image/" + model.TitleImage.FileName;
+                string path = null;
+                if (model.TitleImage != null)
+                {
+                    FileSaverResult fileSaverResult = await _fileSaver.SaveArticleTitleImage(_appEnvironment.WebRootPath, model.TitleImage);
+                    if (fileSaverResult.IsSuccessful)
+                    {
+                        path = fileSaverResult.Path;
+                    }
+                    else
+                    {
+                        ModelState.AddModelError("", "Can't save image");
+                    }
+                }
+
                 var result = await Mediator.Send(new UpdateArticleCommand
                 {
                     Title = model.Title,
@@ -240,13 +264,6 @@ namespace WebApp.Controllers
                 });
                 if (result.IsSuccessful)
                 {
-                    if (path != null)
-                    {
-                        using (var fileStream = new FileStream(_appEnvironment.WebRootPath + path, FileMode.Create))
-                        {
-                            await model.TitleImage.CopyToAsync(fileStream);
-                        }
-                    }
                     return RedirectToAction("Index", "Article");
                 }
                 else

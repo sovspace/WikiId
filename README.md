@@ -1,4 +1,4 @@
-# **Wiki ID**
+# **[Wiki ID](https://wikiid.azurewebsites.net/)**
 ### Web-encyclopedia with personalized access to pages
 
 ### Features:
@@ -17,5 +17,11 @@
 * Using `Entity Framework` as ORM library :satisfied:
 
 * User verification by email :love_letter:
+
+* SignalR
+
+* Third party auth
+
+* Onion via CQRS
 
    

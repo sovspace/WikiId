@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System.Net;
 using System.Threading.Tasks;
 using WebApp.Controllers.Common;
 using WebApp.ViewModels.SubarticleViewModels;
@@ -106,7 +107,11 @@ namespace WebApp.Controllers
                 SubarticleId = subarticleId,
                 UserRoles = await _userManager.GetRolesAsync(currentUser)
             });
-            return new JsonResult(mediatorResult.Message);
+            HttpStatusCode statusCode = mediatorResult.IsSuccessful ? HttpStatusCode.OK : HttpStatusCode.MethodNotAllowed;
+            return new JsonResult(new { mediatorResult.Message })
+            {
+                StatusCode = (int)statusCode,
+            };
         }
     }
 }

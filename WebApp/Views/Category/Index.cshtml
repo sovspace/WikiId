@@ -16,9 +16,14 @@
     @foreach (var item in Model)
     {
         <div class="row mb-2 alert align-items-center" style="background-color: lightgray; border-width: thin; border-color: white; border-radius: 30px;">
-            <div class="col-2 p-2"><img class="img-thumbnail" style="width: auto; height: 100px; border-radius: 15px" src="@Url.Content(item.TitleImagePath)"></div>
-            <div class="col-10 text-left">
+            <div class="col-2 p-2"><img class="img-thumbnail" style="width: 300px; height: 100px; border-radius: 15px" src="@Url.Content(item.TitleImagePath)"></div>
+            <div class="col-10 align-self-center">
                 <a class="text-left" href="@Url.ActionLink("GetCategory", "Category", new { id = item.Id})" style="font-size: 50px;">@item.Title</a>
+                <a href="@Url.ActionLink("Update", "Category", new { categoryId = item.Id})"
+                   class="btn btn-warning" style="margin-left: 5px;height: 25px;font-size: 10px; border-radius: 15px; text-align:center;">
+                    Update article
+                </a>
+
             </div>
         </div>
     }

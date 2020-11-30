@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace FileSaverService.Service
 {
-    class LocalFileSaver : IlFileSaver
+    class LocalFileSaver : IFileSaver
     {
         public readonly FileSaverSettings _fileSaverSettings;
 
@@ -22,9 +22,10 @@ namespace FileSaverService.Service
         {
             try
             {
-                string path = root + _fileSaverSettings.ArticleGalleryFileDirectory + file.FileName;
+                string path = _fileSaverSettings.ArticleGalleryFileDirectory + file.FileName;
+                string fullPath = root + path;
 
-                using (var fileStream = new FileStream(path, FileMode.Create))
+                using (var fileStream = new FileStream(fullPath, FileMode.Create))
                 {
                     await file.CopyToAsync(fileStream);
                 }
@@ -47,9 +48,9 @@ namespace FileSaverService.Service
         {
             try
             {
-                string path = root + _fileSaverSettings.ArticleTitleImageDirectory + image.FileName;
-
-                using (var fileStream = new FileStream(path, FileMode.Create))
+                string path = _fileSaverSettings.ArticleTitleImageDirectory + image.FileName;
+                string fullPath = root + path;
+                using (var fileStream = new FileStream(fullPath, FileMode.Create))
                 {
                     await image.CopyToAsync(fileStream);
                 }
@@ -72,8 +73,9 @@ namespace FileSaverService.Service
         {
             try
             {
-                string path = root + _fileSaverSettings.CategoryTitleImageDirectory + image.FileName;
-                using (var fileStream = new FileStream(path, FileMode.Create))
+                string path = _fileSaverSettings.CategoryTitleImageDirectory + image.FileName;
+                string fullPath = root + path;
+                using (var fileStream = new FileStream(fullPath, FileMode.Create))
                 {
                     await image.CopyToAsync(fileStream);
                 }

@@ -1,5 +1,6 @@
 ﻿using Application.Features.CategoryFeatures.Commands;
 using Application.Features.CategoryFeatures.Queries;
+using FileSaverService.Service;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
@@ -16,10 +17,14 @@ namespace WebApp.Controllers
     public class CategoryController : BaseController
     {
         private readonly IWebHostEnvironment _appEnvironment;
+        private readonly IFileSaver _fileSaver;
+
         public CategoryController(UserManager<IdentityUser> userManager,
-            IWebHostEnvironment appEnvironment) : base(userManager)
+            IWebHostEnvironment appEnvironment,
+            IFileSaver fileSaver) : base(userManager)
         {
             _appEnvironment = appEnvironment;
+            _fileSaver = fileSaver;
         }
 
         [HttpGet]
@@ -65,7 +70,19 @@ namespace WebApp.Controllers
             if (ModelState.IsValid)
             {
                 var identityUser = await _userManager.GetUserAsync(HttpContext.User);
-                string path = model.TitleImage == null ? "/img/no_image.jpg" : "/files/category/title/" + model.TitleImage.FileName;
+                string path = "/img/no_image.jpg";
+                if (model.TitleImage != null)
+                {
+                    FileSaverResult fileSaverResult = await _fileSaver.SaveCategoryTitleImage(_appEnvironment.WebRootPath, model.TitleImage);
+                    if (fileSaverResult.IsSuccessful)
+                    {
+                        path = fileSaverResult.Path;
+                    }
+                    else
+                    {
+                        ModelState.AddModelError("", "Can't save image");
+                    }
+                }
 
                 var result = await Mediator.Send(new CreateCategoryCommand
                 {
@@ -113,7 +130,20 @@ namespace WebApp.Controllers
             if (ModelState.IsValid)
             {
                 var identityUser = await _userManager.GetUserAsync(HttpContext.User);
-                string path = model.TitleImage == null ? null : "/files/category/title/" + model.TitleImage.FileName;
+                string path = null;
+                if (model.TitleImage != null)
+                {
+                    FileSaverResult fileSaverResult = await _fileSaver.SaveCategoryTitleImage(_appEnvironment.WebRootPath, model.TitleImage);
+                    if (fileSaverResult.IsSuccessful)
+                    {
+                        path = fileSaverResult.Path;
+                    }
+                    else
+                    {
+                        ModelState.AddModelError("", "Can't save image");
+                    }
+                }
+
                 var result = await Mediator.Send(new UpdateCategoryCommand
                 {
                     CategoryId = categoryId,

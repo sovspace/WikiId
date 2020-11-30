@@ -18,98 +18,107 @@
 
     @foreach (var item in Model)
     {
-        <div id="article_@item.Id">
-            <div class="row mb-3 alert align-items-center" style="background-color: lightgray; border-width: thin; border-color: white; border-radius: 30px;">
-                <div class="col-2 p-2"><img class="img-thumbnail" style="width: auto; height: 100px; border-radius: 15px" src="@Url.Content(item.TitleImagePath)"></div>
-                <div class="col-8 align-self-center">
-                    <h1>
-                        <a href="@Url.ActionLink("GetArticle", "Article", new { id = item.Id})" style="font-size: 40px;">
-                            @item.Title
-                        </a>
+<div id="article_@item.Id">
+    <div class="row mb-3 alert align-items-center" style="background-color: lightgray; border-width: thin; border-color: white; border-radius: 30px;">
+        <div class="col-2 p-2"><img class="img-thumbnail" style="width: 300px; height: 100px; border-radius: 15px" src="@Url.Content(item.TitleImagePath)"></div>
+        <div class="col-8 align-self-center">
+            <h1>
+                <a href="@Url.ActionLink("GetArticle", "Article", new { id = item.Id})" style="font-size: 40px;">
+                    @item.Title
+                </a>
 
-                        <a href="@Url.ActionLink("Update", "Article", new { articleId = item.Id})"
-                           class="btn btn-warning" style="margin-left: 5px;height: 25px;font-size: 10px; border-radius: 15px;">
-                            Update article
-                        </a>
+                <a href="@Url.ActionLink("Update", "Article", new { articleId = item.Id})"
+                   class="btn btn-warning" style="margin-left: 5px;height: 25px;font-size: 10px; border-radius: 15px;">
+                    Update article
+                </a>
 
-                        <a href="@Url.ActionLink("Create", "Subarticle", new { articleId = item.Id})"
-                           class="btn btn-success" style="margin-left: 5px;height: 25px;font-size: 10px; border-radius: 15px;">
-                            Create subarticle
-                        </a>
+                <a href="@Url.ActionLink("Create", "Subarticle", new { articleId = item.Id})"
+                   class="btn btn-success" style="margin-left: 5px;height: 25px;font-size: 10px; border-radius: 15px;">
+                    Create subarticle
+                </a>
 
-                        <button onclick="deleteArticle(@item.Id)"
-                                class="btn btn-danger btn-sm" type="button" style="margin-left: 5px;height: 25px;font-size: 10px; border-radius: 15px;">
-                            Delete
-                        </button>
-                    </h1>
-                </div>
-                <div class="col-2 align-self-center">
-                    <a href="@Url.ActionLink("GetCategory", "Category", new { id = item.CategoryId })" style="font-size: 15px" class="badge badge-pill badge-primary">@item.CategoryTitle</a>
-                    <span class="badge badge-pill badge-danger" style="font-size: 12px">Creation date @item.CreatedDate.ToShortDateString()</span>
-                    <span class="badge badge-pill badge-info" style="font-size: 12px">Updated date @item.UpdatedDate.ToShortDateString()</span>
-                    <span class="badge badge-pill badge-success" style="font-size: 12px">Creator @item.Creator.UserName</span>
-                </div>
+                <button onclick="deleteArticle(@item.Id)"
+                        class="btn btn-danger btn-sm" type="button" style="margin-left: 5px;height: 25px;font-size: 10px; border-radius: 15px;">
+                    Delete
+                </button>
+            </h1>
+        </div>
+        <div class="col-2 align-self-center">
+            <a href="@Url.ActionLink("GetCategory", "Category", new { id = item.CategoryId })" style="font-size: 15px" class="badge badge-pill badge-primary">@item.CategoryTitle</a>
+            <span class="badge badge-pill badge-danger" style="font-size: 12px">Creation date @item.CreatedDate.ToShortDateString()</span>
+            <span class="badge badge-pill badge-info" style="font-size: 12px">Updated date @item.UpdatedDate.ToShortDateString()</span>
+            <span class="badge badge-pill badge-success" style="font-size: 12px">Creator @item.Creator.UserName</span>
+        </div>
+    </div>
+    <div class="row mb-1 alert align-items-center" style="border-width: thin; border-color: white; border-radius: 30px;">
+        <div class="col-4">
+            <h3 class="text-center" style="margin-top: 10px;">Can view users</h3>
+        </div>
+        <div class="col-4">
+            <h3 class="text-center" style="margin-top: 10px;">Can edit users</h3>
+        </div>
+        <div class="col-4">
+            <h3 class="text-center" style="margin-top: 10px;">Access requests</h3>
+        </div>
+
+    </div>
+
+        <div class="row mb-3 alert align-items-center" style="background-color: lightblue; border-width: thin; border-color: white; border-radius: 30px;">
+            <div class="col-4">
+                <ul>
+                    @foreach (var viewUser in item.CanViewUsers)
+                    {
+                        <li id="list_element_@commonIndex">
+                            @viewUser.UserName
+                            <button onclick="removeRole(@item.Id.ToString(), '@viewUser.Id.ToString()', '@AccessType.Edit', @commonIndex)"
+                                    class="btn btn-danger btn-sm" type="button" style="margin-left: 10px;height: 25px;font-size: 10px;">
+                                Remove
+                            </button>
+                        </li>
+                        commonIndex++;
+                    }
+                </ul>
             </div>
+            <div class="col-4">
+                <ul>
+                    @foreach (var editUser in item.CanEditUsers)
+                    {
+                        <li id="list_element_@commonIndex" style="margin-bottom: 10px">
+                            @editUser.UserName
+                            <button onclick="removeRole(@item.Id.ToString(), '@editUser.Id.ToString()', '@AccessType.Edit', @commonIndex)"
+                                    class="btn btn-danger btn-sm" type="button" style="margin-left: 10px;height: 25px;font-size: 10px;">
+                                Remove
+                            </button>
+                        </li>
 
-            <div class="row mb-3 alert align-items-center" style="background-color: lightblue; border-width: thin; border-color: white; border-radius: 30px;">
-                <div class="col-4">
-                    <h3 class="text-center" style="margin-top: 10px;">Can view users</h3>
-                    <ul>
-                        @foreach (var viewUser in item.CanViewUsers)
-                        {
-                            <li id="list_element_@commonIndex">
-                                @viewUser.UserName
-                                <button onclick="removeRole(@item.Id.ToString(), '@viewUser.Id.ToString()', '@AccessType.Edit', @commonIndex)"
-                                        class="btn btn-danger btn-sm" type="button" style="margin-left: 10px;height: 25px;font-size: 10px;">
-                                    Remove
-                                </button>
-                            </li>
-                            commonIndex++;
-                        }
-                    </ul>
-                </div>
-                <div class="col-4">
-                    <h3 class="text-center" style="margin-top: 10px;">Can edit users</h3>
-                    <ul>
-                        @foreach (var editUser in item.CanEditUsers)
-                        {
-                            <li id="list_element_@commonIndex" style="margin-bottom: 10px">
-                                @editUser.UserName
-                                <button onclick="removeRole(@item.Id.ToString(), '@editUser.Id.ToString()', '@AccessType.Edit', @commonIndex)"
-                                        class="btn btn-danger btn-sm" type="button" style="margin-left: 10px;height: 25px;font-size: 10px;">
-                                    Remove
-                                </button>
-                            </li>
+                        commonIndex++;
 
-                            commonIndex++;
+                    }
+                </ul>
+            </div>
+            <div class="col-4">
+                <ul>
+                    @foreach (var accessRequest in item.AccessRequestViewModels)
+                    {
+                        <li id="list_element_@commonIndex">
+                            @accessRequest.UserViewModel.UserName
+                            <button onclick="disApproveAccessRequest(@accessRequest.Id, @commonIndex)"
+                                    class="btn btn-danger btn-sm" type="button" style="margin-left: 10px;height: 25px;font-size: 10px;">
+                                Disapprove
+                            </button>
+                            <button onclick="approveAccessRequest(@accessRequest.Id, @commonIndex)"
+                                    class="btn btn-success btn-sm" type="button" style="margin-left: 10px;height: 25px;font-size: 10px;">
+                                Approve
+                            </button>
+                        </li>
 
-                        }
-                    </ul>
-                </div>
-                <div class="col-4">
-                    <h3 class="text-center" style="margin-top: 10px;">Access requests</h3>
-                    <ul>
-                        @foreach (var accessRequest in item.AccessRequestViewModels)
-                        {
-                            <li id="list_element_@commonIndex">
-                                @accessRequest.UserViewModel.UserName
-                                <button onclick="disApproveAccessRequest(@accessRequest.Id, @commonIndex)"
-                                        class="btn btn-danger btn-sm" type="button" style="margin-left: 10px;height: 25px;font-size: 10px;">
-                                    Disapprove
-                                </button>
-                                <button onclick="approveAccessRequest(@accessRequest.Id, @commonIndex)"
-                                        class="btn btn-success btn-sm" type="button" style="margin-left: 10px;height: 25px;font-size: 10px;">
-                                    Approve
-                                </button>
-                            </li>
+                        commonIndex++;
+                    }
 
-                            commonIndex++;
-                        }
-
-                    </ul>
-                </div>
+                </ul>
             </div>
         </div>
+    </div>
     }
 </div>
 

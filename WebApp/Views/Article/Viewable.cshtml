@@ -16,7 +16,7 @@
     @foreach (var item in Model)
     {
         <div class="row mb-2 alert align-items-center" style="background-color: lightgray; border-width: thin; border-color: white; border-radius: 30px;">
-            <div class="col-2 p-2"><img class="img-thumbnail" style="width: auto; height: 100px; border-radius: 15px" src="@Url.Content(item.TitleImagePath)"></div>
+            <div class="col-2 p-2"><img  class="img-thumbnail" style="width: 300px; height: 100px; border-radius: 15px" src="@Url.Content(item.TitleImagePath)"></div>
             <div class="col-8 align-self-center">
                 <a class="text-left mr-auto" href="@Url.ActionLink("GetArticle", "Article", new { id = item.Id})" style="font-size: 50px;">@item.Title</a>
             </div>

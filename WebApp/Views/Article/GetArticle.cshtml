@@ -29,33 +29,47 @@
                 Update article
             </a>
             <button onclick="deleteArticle(@Model.Id)"
-               class="btn btn-danger btn-sm" type="button" style="margin-left: 10px;height: 25px;font-size: 10px;">
-                Delete 
+                    class="btn btn-danger btn-sm" type="button" style="margin-left: 10px;height: 25px;font-size: 10px;">
+                Delete
             </button>
             <button onclick="makeEditAccessRequest(@Model.Id)"
-               class="btn btn-info btn-sm" type="button" style="margin-left: 10px;height: 25px;font-size: 10px;">
+                    class="btn btn-info btn-sm" type="button" style="margin-left: 10px;height: 25px;font-size: 10px;">
                 Make edit access request
             </button>
         </div>
     </div>
 
-    <div class="row">
+    <div class="row mt-2">
         <div class="col text-center" style="padding: 10px;">
             <img class="img-responsive" src="@Url.Content(Model.TitleImagePath)" style="max-width: 500px; height: auto;">
         </div>
     </div>
+    @{int subarticleIndex = 0;}
     @foreach (var subarticle in Model.Subarticles)
     {
-        <div class="row">
-            <div class="col">
-                <h1>@subarticle.Title</h1>
+        <div id="subarticle_@subarticleIndex">
+            <div class="row">
+                <div class="col">
+                    <h1>@subarticle.Title</h1>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <button onclick="deleteSubarticle(@subarticle.Id, @subarticleIndex)"
+                       class="btn btn-danger btn-sm" type="button" style="height: 25px;font-size: 10px;">
+                        Add subarticle
+                    </button>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col">
+                    <p>@subarticle.Content</p>
+                </div>
             </div>
         </div>
-        <div class="row">
-            <div class="col">
-                <p>@subarticle.Content</p>
-            </div>
-        </div>
+
+        subarticleIndex++;
     }
 
     @if (Model.GalleryPaths.Any())
@@ -85,6 +99,7 @@
             var url = raw_url.replace('__articleId__', articleId)
             $.ajax({
                 type: "POST",
+                dataType: 'json',
                 url: url,
                 success: function (result) {
                     location.href = "@Url.ActionLink("Index", "Article")";
@@ -100,6 +115,7 @@
             var url = raw_url.replace('__articleId__', articleId)
             $.ajax({
                 type: "POST",
+                dataType: 'json',
                 url: url,
                 success: function (result) {
                     toastr.success(result.responseJSON.message);
@@ -109,6 +125,25 @@
                 }
             });
         }
+        function deleteSubarticle(subarticleId, subarticleIndex) {
+            var raw_url = '@Html.Raw(Url.Action("Delete", "Subarticle",
+                    new { subarticleId = "__subarticleId__"}))'
+            var url = raw_url.replace('__subarticleId__', subarticleId)
+            $.ajax({
+                type: "POST",
+                dataType: 'json',
+                url: url,
+                success: function (result) {
+                    $('#subarticle_' + subarticleIndex).remove();
+                    toastr.success(result.message);
+                },
+                error: function (result) {
+                    toastr.error(result.message);
+                }
+            });
+        }
+
+
     </script>
 }
 
