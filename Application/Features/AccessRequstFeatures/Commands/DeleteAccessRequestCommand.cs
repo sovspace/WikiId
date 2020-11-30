@@ -4,6 +4,7 @@ using Application.Interfaces;
 using Domain.Entities;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -23,31 +24,44 @@ namespace Application.Features.AccessRequstFeatures.Commands
 
             public async Task<DeleteAccessRequestResponse> Handle(DeleteAccessRequestCommand request, CancellationToken cancellationToken)
             {
-                AccessRequest accessRequest = await _context.AccessRequests
-                    .Where(a => a.Id == request.AccessRequstId)
-                    .Include(a => a.Profile)
-                    .Include(a => a.Article)
-                    .ThenInclude(ar => ar.Creator)
-                    .SingleOrDefaultAsync();
 
-
-                if (accessRequest.Article.Creator.IdentityUserId == request.IdentityUserId)
+                try
                 {
-                    _context.AccessRequests.Remove(accessRequest);
-                    await _context.SaveChangesAsync();
+                    AccessRequest accessRequest = await _context.AccessRequests
+                        .Where(a => a.Id == request.AccessRequstId)
+                        .Include(a => a.Profile)
+                        .Include(a => a.Article)
+                        .ThenInclude(ar => ar.Creator)
+                        .SingleOrDefaultAsync();
 
-                    return new DeleteAccessRequestResponse
+
+                    if (accessRequest.Article.Creator.IdentityUserId == request.IdentityUserId)
                     {
-                        IsSuccessful = true,
-                        Id = request.AccessRequstId,
-                    };
+                        _context.AccessRequests.Remove(accessRequest);
+                        await _context.SaveChangesAsync();
+
+                        return new DeleteAccessRequestResponse
+                        {
+                            IsSuccessful = true,
+                            Id = request.AccessRequstId,
+                        };
+                    }
+                    else
+                    {
+                        return new DeleteAccessRequestResponse
+                        {
+                            IsSuccessful = false,
+                            Message = "Can't delete this access request",
+                        };
+                    }
+
                 }
-                else
+                catch (Exception)
                 {
                     return new DeleteAccessRequestResponse
                     {
                         IsSuccessful = false,
-                        Message = "Can't delete this access request",
+                        Message = "Can't do this",
                     };
                 }
 

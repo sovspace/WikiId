@@ -4,6 +4,7 @@ using Application.Interfaces;
 using Domain.Entities;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -27,58 +28,70 @@ namespace Application.Features.ArticleFeatures.Commands
             public async Task<CreateArticleResponse> Handle(CreateArticleCommand request, CancellationToken cancellationToken)
             {
 
-                Category category = await _context.Categories.Where(c => c.Id == request.CategoryId).SingleOrDefaultAsync();
+                try
+                {
 
-                if (category == null)
+                    Category category = await _context.Categories.Where(c => c.Id == request.CategoryId).SingleOrDefaultAsync();
+
+                    if (category == null)
+                    {
+                        return new CreateArticleResponse
+                        {
+                            IsSuccessful = false,
+                            Message = "No category found"
+                        };
+                    }
+
+                    Profile creator = await _context.Profiles.Where(p => p.IdentityUserId == request.IdentityUserId).SingleOrDefaultAsync();
+                    if (creator == null)
+                    {
+                        return new CreateArticleResponse
+                        {
+                            IsSuccessful = false,
+                            Message = "No user found"
+                        };
+                    }
+
+                    string editRoleName = $"Edit{request.Title}";
+                    string viewRoleName = $"View{request.Title}";
+
+                    MediaFile titleImage = new MediaFile
+                    {
+                        Path = request.TitleImagePath,
+                        Type = Domain.Enums.FileType.ImageFile,
+                    };
+                    _context.MediaFiles.Add(titleImage);
+
+                    Article article = new Article
+                    {
+                        Title = request.Title,
+                        TitleImage = titleImage,
+                        EditRoleString = editRoleName,
+                        ViewRoleString = viewRoleName,
+                        Category = category,
+                        Creator = creator,
+                        IsPublic = request.IsPublic
+                    };
+
+                    _context.Articles.Add(article);
+                    await _context.SaveChangesAsync();
+
+                    return new CreateArticleResponse
+                    {
+                        IsSuccessful = true,
+                        ArticleId = article.Id,
+                        EditArticleRoleName = editRoleName,
+                        ViewArticleRoleName = viewRoleName
+                    };
+                }
+                catch (Exception)
                 {
                     return new CreateArticleResponse
                     {
                         IsSuccessful = false,
-                        Message = "No category found"
+                        Message = "Can do this"
                     };
                 }
-
-                Profile creator = await _context.Profiles.Where(p => p.IdentityUserId == request.IdentityUserId).SingleOrDefaultAsync();
-                if (creator == null)
-                {
-                    return new CreateArticleResponse
-                    {
-                        IsSuccessful = false,
-                        Message = "No user found"
-                    };
-                }
-
-                string editRoleName = $"Edit{request.Title}";
-                string viewRoleName = $"View{request.Title}";
-
-                MediaFile titleImage = new MediaFile
-                {
-                    Path = request.TitleImagePath,
-                    Type = Domain.Enums.FileType.ImageFile,
-                };
-                _context.MediaFiles.Add(titleImage);
-
-                Article article = new Article
-                {
-                    Title = request.Title,
-                    TitleImage = titleImage,
-                    EditRoleString = editRoleName,
-                    ViewRoleString = viewRoleName,
-                    Category = category,
-                    Creator = creator,
-                    IsPublic = request.IsPublic
-                };
-
-                _context.Articles.Add(article);
-                await _context.SaveChangesAsync();
-
-                return new CreateArticleResponse
-                {
-                    IsSuccessful = true,
-                    ArticleId = article.Id,
-                    EditArticleRoleName = editRoleName,
-                    ViewArticleRoleName = viewRoleName
-                };
             }
         }
 

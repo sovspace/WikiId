@@ -26,41 +26,50 @@ namespace Application.Features.SubarticleFeatures.Commands
 
             public async Task<CreateSubarticleResponse> Handle(CreateSubarticleCommand request, CancellationToken cancellationToken)
             {
-                Article article = await _context.Articles.Where(a => a.Id == request.ArticleId).SingleOrDefaultAsync();
+                try
+                {
+                    Article article = await _context.Articles.Where(a => a.Id == request.ArticleId).SingleOrDefaultAsync();
+                    if (article == null)
+                    {
+                        return new CreateSubarticleResponse
+                        {
+                            IsSuccessful = false,
+                            Message = "No article found",
+                        };
+                    }
 
-                if (article == null)
+                    if (request.UserRoles.Contains(article.EditRoleString))
+                    {
+                        Subarticle subarticle = new Subarticle
+                        {
+                            Title = request.Title,
+                            Content = request.Content,
+                            Article = article
+                        };
+
+                        _context.Subarticles.Add(subarticle);
+                        await _context.SaveChangesAsync();
+                        return new CreateSubarticleResponse
+                        {
+                            IsSuccessful = true,
+                            Id = subarticle.Id,
+                        };
+
+                    }
+                    else
+                    {
+                        return new CreateSubarticleResponse
+                        {
+                            IsSuccessful = false,
+                            Message = "Can't edit article",
+                        };
+                    }
+                } catch(Exception)
                 {
                     return new CreateSubarticleResponse
                     {
                         IsSuccessful = false,
-                        Message = "No article found",
-                    };
-                }
-
-                if (request.UserRoles.Contains(article.EditRoleString))
-                {
-                    Subarticle subarticle = new Subarticle
-                    {
-                        Title = request.Title,
-                        Content = request.Content,
-                        Article = article
-                    };
-
-                    _context.Subarticles.Add(subarticle);
-                    await _context.SaveChangesAsync();
-                    return new CreateSubarticleResponse
-                    {
-                        IsSuccessful = true,
-                        Id = subarticle.Id,
-                    };
-
-                }
-                else
-                {
-                    return new CreateSubarticleResponse
-                    {
-                        IsSuccessful = false,
-                        Message = "Can't edit article",
+                        Message = "Can't do this",
                     };
                 }
             }

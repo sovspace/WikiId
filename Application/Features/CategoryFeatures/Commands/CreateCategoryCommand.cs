@@ -4,6 +4,7 @@ using Application.Interfaces;
 using Domain.Entities;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -24,39 +25,49 @@ namespace Application.Features.CategoryFeatures.Commands
 
             public async Task<CreateCategoryResponse> Handle(CreateCategoryCommand request, CancellationToken cancellationToken)
             {
-                MediaFile titleImage = new MediaFile
+                try
                 {
-                    Path = request.TitleImagePath,
-                    Type = Domain.Enums.FileType.ImageFile,
-                };
-                _context.MediaFiles.Add(titleImage);
+                    MediaFile titleImage = new MediaFile
+                    {
+                        Path = request.TitleImagePath,
+                        Type = Domain.Enums.FileType.ImageFile,
+                    };
+                    _context.MediaFiles.Add(titleImage);
 
-                Profile profile = await _context.Profiles.Where(p => p.IdentityUserId == request.IdentityUserId).SingleOrDefaultAsync();
+                    Profile profile = await _context.Profiles.Where(p => p.IdentityUserId == request.IdentityUserId).SingleOrDefaultAsync();
 
-                if (profile == null)
+                    if (profile == null)
+                    {
+                        return new CreateCategoryResponse
+                        {
+                            IsSuccessful = false,
+                            Message = "No profile found",
+                        };
+                    }
+
+                    Category category = new Category
+                    {
+                        Creator = profile,
+                        Title = request.Title,
+                        TitleImage = titleImage
+                    };
+
+                    _context.Categories.Add(category);
+                    await _context.SaveChangesAsync();
+
+                    return new CreateCategoryResponse
+                    {
+                        IsSuccessful = true,
+                        Id = category.Id,
+                    };
+                } catch (Exception)
                 {
                     return new CreateCategoryResponse
                     {
                         IsSuccessful = false,
-                        Message = "No profile found",
+                        Message = "Can't do this",
                     };
                 }
-
-                Category category = new Category
-                {
-                    Creator = profile,
-                    Title = request.Title,
-                    TitleImage = titleImage
-                };
-
-                _context.Categories.Add(category);
-                await _context.SaveChangesAsync();
-
-                return new CreateCategoryResponse
-                {
-                    IsSuccessful = true,
-                    Id = category.Id,
-                };
             }
         }
     }

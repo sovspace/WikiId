@@ -23,38 +23,49 @@ namespace Application.Features.SubarticleFeatures.Commands
 
             public async Task<DeleteSubarticleResponse> Handle(DeleteSubarticleCommand request, CancellationToken cancellationToken)
             {
-                Subarticle subarticle = await _context.Subarticles
-                    .Include(s => s.Article)
-                    .Where(s => s.Id == request.SubarticleId).SingleOrDefaultAsync();
+                try
+                {
+                    Subarticle subarticle = await _context.Subarticles
+                        .Include(s => s.Article)
+                        .Where(s => s.Id == request.SubarticleId).SingleOrDefaultAsync();
 
-                if (subarticle == null)
-                {
-                    return new DeleteSubarticleResponse
-                    {
-                        IsSuccessful = false,
-                        Message = "No subarticle found",
-                    };
-                }
-                else
-                {
-                    if (request.UserRoles.Contains(subarticle.Article.EditRoleString))
-                    {
-                        _context.Subarticles.Remove(subarticle);
-                        await _context.SaveChangesAsync();
-                        return new DeleteSubarticleResponse
-                        {
-                            IsSuccessful = true,
-                            Id = subarticle.Id,
-                        };
-                    }
-                    else
+                    if (subarticle == null)
                     {
                         return new DeleteSubarticleResponse
                         {
                             IsSuccessful = false,
-                            Message = "Can't delete subarticle",
+                            Message = "No subarticle found",
                         };
                     }
+                    else
+                    {
+                        if (request.UserRoles.Contains(subarticle.Article.EditRoleString))
+                        {
+                            _context.Subarticles.Remove(subarticle);
+                            await _context.SaveChangesAsync();
+                            return new DeleteSubarticleResponse
+                            {
+                                IsSuccessful = true,
+                                Id = subarticle.Id,
+                            };
+                        }
+                        else
+                        {
+                            return new DeleteSubarticleResponse
+                            {
+                                IsSuccessful = false,
+                                Message = "Can't delete subarticle",
+                            };
+                        }
+                    }
+
+                } catch (Exception)
+                {
+                    return new DeleteSubarticleResponse
+                    {
+                        IsSuccessful = false,
+                        Message = "Can't do this",
+                    };
                 }
             }
         }

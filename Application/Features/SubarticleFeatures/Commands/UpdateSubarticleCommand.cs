@@ -4,6 +4,7 @@ using Application.Interfaces;
 using Domain.Entities;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
@@ -26,44 +27,54 @@ namespace Application.Features.SubarticleFeatures.Commands
 
             public async Task<UpdateSubarticleResponse> Handle(UpdateSubarticleCommand request, CancellationToken cancellationToken)
             {
-                Subarticle subarticle = await _context.Subarticles
-                    .Include(s => s.Article)
-                    .Where(s => s.Id == request.SubarticleId).SingleOrDefaultAsync();
-
-                if (subarticle == null)
+                try
                 {
+                    Subarticle subarticle = await _context.Subarticles
+                        .Include(s => s.Article)
+                        .Where(s => s.Id == request.SubarticleId).SingleOrDefaultAsync();
+
+                    if (subarticle == null)
+                    {
+                        return new UpdateSubarticleResponse
+                        {
+                            IsSuccessful = false,
+                            Message = "No subarticle found",
+                        };
+                    }
+
+                    if (request.UserRoles.Contains(subarticle.Article.EditRoleString))
+                    {
+                        if (request.Title != null)
+                        {
+                            subarticle.Title = request.Title;
+                        }
+                        if (request.Content != null)
+                        {
+                            subarticle.Content = request.Content;
+                        }
+
+                        _context.Subarticles.Update(subarticle);
+                        await _context.SaveChangesAsync();
+                        return new UpdateSubarticleResponse
+                        {
+                            IsSuccessful = true,
+                            Id = subarticle.Id,
+                        };
+                    }
+                    else
+                    {
+                        return new UpdateSubarticleResponse
+                        {
+                            IsSuccessful = false,
+                            Message = "Can't update subarticle",
+                        };
+                    }
+                }
+                catch (Exception){
                     return new UpdateSubarticleResponse
                     {
                         IsSuccessful = false,
-                        Message = "No subarticle found",
-                    };
-                }
-
-                if (request.UserRoles.Contains(subarticle.Article.EditRoleString))
-                {
-                    if (request.Title != null)
-                    {
-                        subarticle.Title = request.Title;
-                    }
-                    if (request.Content != null)
-                    {
-                        subarticle.Content = request.Content;
-                    }
-
-                    _context.Subarticles.Update(subarticle);
-                    await _context.SaveChangesAsync();
-                    return new UpdateSubarticleResponse
-                    {
-                        IsSuccessful = true,
-                        Id = subarticle.Id,
-                    };
-                }
-                else
-                {
-                    return new UpdateSubarticleResponse
-                    {
-                        IsSuccessful = false,
-                        Message = "Can't update subarticle",
+                        Message = "Can't do this",
                     };
                 }
 

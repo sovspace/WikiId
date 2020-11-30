@@ -25,57 +25,68 @@ namespace Application.Features.CategoryFeatures.Commands
 
             public async Task<UpdateCategoryResponse> Handle(UpdateCategoryCommand request, CancellationToken cancellationToken)
             {
-                Category category = await _context.Categories
-                    .Include(c => c.Creator)
-                    .Where(c => c.Id == request.CategoryId).SingleOrDefaultAsync();
-
-                if (category == null)
+                try
                 {
-                    return new UpdateCategoryResponse
-                    {
-                        IsSuccessful = false,
-                        Message = "Category is not found",
-                    };
-                }
-                else
-                {
-                    if (category.Creator.IdentityUserId == request.IdentityUserId)
-                    {
 
-                        if (request.Title != null)
-                        {
-                            category.Title = request.Title;
-                        }
+                    Category category = await _context.Categories
+                        .Include(c => c.Creator)
+                        .Where(c => c.Id == request.CategoryId).SingleOrDefaultAsync();
 
-                        if (request.TitleImagePath != null)
-                        {
-                            MediaFile mediaFile = new MediaFile
-                            {
-                                Path = request.TitleImagePath,
-                                Type = Domain.Enums.FileType.ImageFile,
-                            };
-                            _context.MediaFiles.Add(mediaFile);
-
-                            category.TitleImage = mediaFile;
-                        }
-
-                        _context.Categories.Update(category);
-                        await _context.SaveChangesAsync();
-
-                        return new UpdateCategoryResponse
-                        {
-                            IsSuccessful = true,
-                            Id = category.Id,
-                        };
-                    }
-                    else
+                    if (category == null)
                     {
                         return new UpdateCategoryResponse
                         {
                             IsSuccessful = false,
-                            Message = "Can't update category",
+                            Message = "Category is not found",
                         };
                     }
+                    else
+                    {
+                        if (category.Creator.IdentityUserId == request.IdentityUserId)
+                        {
+
+                            if (request.Title != null)
+                            {
+                                category.Title = request.Title;
+                            }
+
+                            if (request.TitleImagePath != null)
+                            {
+                                MediaFile mediaFile = new MediaFile
+                                {
+                                    Path = request.TitleImagePath,
+                                    Type = Domain.Enums.FileType.ImageFile,
+                                };
+                                _context.MediaFiles.Add(mediaFile);
+
+                                category.TitleImage = mediaFile;
+                            }
+
+                            _context.Categories.Update(category);
+                            await _context.SaveChangesAsync();
+
+                            return new UpdateCategoryResponse
+                            {
+                                IsSuccessful = true,
+                                Id = category.Id,
+                            };
+                        }
+                        else
+                        {
+                            return new UpdateCategoryResponse
+                            {
+                                IsSuccessful = false,
+                                Message = "Can't update category",
+                            };
+                        }
+                    }
+                } catch (Exception)
+                {
+                    return new UpdateCategoryResponse
+                    {
+                        IsSuccessful = false,
+                        Message = "Can't do this",
+                    };
                 }
 
             }

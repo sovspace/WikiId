@@ -27,53 +27,63 @@ namespace Application.Features.AccessRequstFeatures.Commands
 
             public async Task<CreateAccessRequestResponse> Handle(CreateAccessRequestCommand request, CancellationToken cancellationToken)
             {
-                Article article = await _context.Articles.FindAsync(request.ArticleId);
-                if (article == null)
+                try
+                {
+                    Article article = await _context.Articles.FindAsync(request.ArticleId);
+                    if (article == null)
+                    {
+                        return new CreateAccessRequestResponse
+                        {
+                            IsSuccessful = false,
+                            Message = "Article not found",
+                        };
+                    }
+
+                    if ((request.AccessType == AccessType.Edit && request.UserRoles.Contains(article.EditRoleString)) ||
+                        (request.AccessType == AccessType.View && request.UserRoles.Contains(article.ViewRoleString)))
+                    {
+                        return new CreateAccessRequestResponse
+                        {
+                            IsSuccessful = false,
+                            Message = "You have already this role",
+                        };
+                    }
+
+
+                    Profile profile = await _context.Profiles.Where(p => p.IdentityUserId == request.IdentityUserId).FirstOrDefaultAsync();
+                    if (profile == null)
+                    {
+                        return new CreateAccessRequestResponse
+                        {
+                            IsSuccessful = false,
+                            Message = "Profile not found",
+                        };
+                    }
+
+                    AccessRequest accessRequest = new AccessRequest
+                    {
+                        AccessType = request.AccessType,
+                        Profile = profile,
+                        Article = article,
+                    };
+
+                    _context.AccessRequests.Add(accessRequest);
+                    await _context.SaveChangesAsync();
+
+                    return new CreateAccessRequestResponse
+                    {
+                        IsSuccessful = true,
+                        Id = accessRequest.Id,
+                    };
+                }
+                catch (Exception)
                 {
                     return new CreateAccessRequestResponse
                     {
                         IsSuccessful = false,
-                        Message = "Article not found",
+                        Id = "Can't save this",
                     };
                 }
-
-                if ((request.AccessType == AccessType.Edit && request.UserRoles.Contains(article.EditRoleString)) ||
-                    (request.AccessType == AccessType.View && request.UserRoles.Contains(article.ViewRoleString)))
-                {
-                    return new CreateAccessRequestResponse
-                    {
-                        IsSuccessful = false,
-                        Message = "You have already this role",
-                    };
-                }
-
-
-                Profile profile = await _context.Profiles.Where(p => p.IdentityUserId == request.IdentityUserId).FirstOrDefaultAsync();
-                if (profile == null)
-                {
-                    return new CreateAccessRequestResponse
-                    {
-                        IsSuccessful = false,
-                        Message = "Profile not found",
-                    };
-                }
-
-                AccessRequest accessRequest = new AccessRequest
-                {
-                    AccessType = request.AccessType,
-                    Profile = profile,
-                    Article = article,
-                };
-
-                _context.AccessRequests.Add(accessRequest);
-                await _context.SaveChangesAsync();
-
-                return new CreateAccessRequestResponse
-                {
-                    IsSuccessful = true,
-                    Id = accessRequest.Id,
-                };
-
             }
         }
     }
